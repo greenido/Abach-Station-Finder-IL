@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  <script>
+
+// forked: RSS Reader with jQuery Mobile" http://jsdo.it/sumukh1/4Ton
+/* configuration */
+var maxItems = 25;
+
+$( document ).bind( 'pageinit', function(){
+  $.mobile.loader.prototype.options.text = "loading";
+  $.mobile.loader.prototype.options.textVisible = false;
+  $.mobile.loader.prototype.options.theme = "e";
+  $.mobile.loader.prototype.options.html = "";
+  
+for(i=1; i <= maxItems; i++){
+  $("#intPages").append(
+  // document.write(
+    '<div data-role="page" id="article' + i + '"> ' +
+    '<div data-role="header" data-position="inline"> ' +
+    '<a href="#list" data-role="button" data-icon="home" data-back="true">Home</a> ' +
+    '<h1 id="articleHeader' + i + '">&nbsp;</h1> ' +
+    '<a href="#" id="openButton' + i + '" data-role="button" data-icon="plus" ' +
+    'class="ui-btn-right" rel="external">Open</a> ' +
+    '</div> <div data-role="content"> ' +
+    '<div id="articleContent' + i + '" class="articleContent"></div> ' +
+    '<div data-role="controlgroup" data-type="horizontal"> ' +
+    '<a href="#article ' + String(i-1) + '" data-role="button" data-icon="arrow-l" ' +
+    'data-inline="true" class="prevButton">Prev</a> ' +
+    '<a href="#article ' + String(i +1)+ '" data-role="button" data-icon="arrow-r" ' +
+    'data-inline="true" class="nextButton" data-iconpos="right">Next</a> </div> + </div> + </div>'
+    );
+  }
+
+});
+
+/* 
+  fetch our cache feed from pipes... this will enable us to merge/sort and work with the feeds 
+  uri: http://pipes.yahoo.com/idopipes/alertsil
+*/
+$(function(){
+  getOnlineFeed('http://pipes.yahoo.com/pipes/pipe.run?_id=866c24404f4ae093008efc6cff7d0d09&_render=rss');
+  // getOnlineFeed('http://darom.gov.il/NewsAndArticles/LocalNews/_layouts/rssfeed.aspx');
+  // getOnlineFeed('http://www.ynet.co.il/Integration/StoryRss1854.xml')
+});
+
+/* 
+  helpers 
+*/
+var listEntries = function(json) {
+  if (!json.responseData.feed.entries) return false;
+
+  $('#widgetTitle').text(json.responseData.feed.title);
+  
+  var articleLength = json.responseData.feed.entries.length;
+  articleLength     = (articleLength > maxItems) ? maxItems : articleLength;
+  
+  for (var i = 1; i <= articleLength; i++) {
+    var entry = json.responseData.feed.entries[i-1];
+    $('#link' + i).text(entry.title);
+    $('#articleHeader' + i).text(entry.title);
+    var tmpLink = entry.link;
+    if (tmpLink.indexOf("..")>0) {
+      tmpLink += "http://darom.gov.il/NewsAndArticles/LocalNews/";
+    }
+    $('#openButton' + i).attr('href', tmpLink);
+    $('#articleContent' + i).append(entry.content);
+  }
+
+  $('#article1 .prevButton').remove();
+  $('#article' + articleLength + ' .nextButton').remove();
+  if (articleLength < maxItems) {
+    for (i = articleLength + 1; i <= maxItems; i++) {
+      $('#list' + i).remove();
+      $('#article' + i).remove();
+    }
+  }
+}
+
+var getOnlineFeed = function(url) {
+  var script = document.createElement('script');
+  script.setAttribute('src', 'http://ajax.googleapis.com/ajax/services/feed/load?callback=listEntries&hl=ja&output=json-in-script&q='
+                      + encodeURIComponent(url)
+                      + '&v=1.0&num=' + maxItems);
+  script.setAttribute('type', 'text/javascript');
+  document.documentElement.firstChild.appendChild(script);
+}
+
+var getOfflineFeed = function(url) {
+  var script = document.createElement('script');
+  script.setAttribute('src', url);
+  script.setAttribute('type', 'text/javascript');
+  document.documentElement.firstChild.appendChild(script);
+}
+
+</script>
+
+</head>
+
+<body>
+  <div data-role="page" id="list">
+    <div data-role="header" data-position="fixed">
+      <h1>
+        <span id="widgetTitle">...</span>
+        <span style="font-size: x-small">(alpha)</span>
+      </h1>
+    </div>
+    <div data-role="content">
+      <ul data-role="listview" data-filter="true" id="articleList">
+        <li id="list1">
+          <a href="#article1" id="link1">&nbsp;</a>
+        </li>
+        <li id="list2">
+          <a href="#article2" id="link2">&nbsp;</a>
+        </li>
+        <li id="list3">
+          <a href="#article3" id="link3">&nbsp;</a>
+        </li>
+        <li id="list4">
+          <a href="#article4" id="link4">&nbsp;</a>
+        </li>
+        <li id="list5">
+          <a href="#article5" id="link5">&nbsp;</a>
+        </li>
+        <li id="list6">
+          <a href="#article6" id="link6">&nbsp;</a>
+        </li>
+        <li id="list7">
+          <a href="#article7" id="link7">&nbsp;</a>
+        </li>
+        <li id="list8">
+          <a href="#article8" id="link8">&nbsp;</a>
+        </li>
+        <li id="list9">
+          <a href="#article9" id="link9">&nbsp;</a>
+        </li>
+        <li id="list9">
+          <a href="#article10" id="link10">&nbsp;</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id='intPages'></div>
+</body>
+</html>
