@@ -20,18 +20,20 @@ var maxLength = 20;
 // TODO - change it to something better with append
 document.write(
   '<div data-role="page" id="list">' +
-  '  <div data-role="header" data-position="fixed">' +
-  '    <h1><span id="widgetTitle">Alerts IL</span> ' +
-  '      <span style="font-size: x-small">(2012)</span></h1>' +
-  '  </div>' +
-  '  <div data-role="content">' +
-  '    <ul data-role="listview" id="articleList">'
+  '<div data-role="header" data-position="fixed">' +
+  '<h1><span id="widgetTitle">Alerts IL</span> ' +
+  '<span style="font-size: x-small">(2012)</span></h1>' +
+  '</div>' +
+  '<div data-role="content">' +
+  '<ul data-role="listview" id="articleList">'
 );
 
 // add the list of alerts
 for(var i=1; i<=maxLength; i++){
-  document.write(
-    '<li id="list' + i + '"><a href="#article' + i + '" id="link' + i + '">&nbsp;</a></li>'
+  document.write('<li id="list' + i + 
+    '"><a href="#article'       + i + 
+    '" id="link'                + i + 
+    '">&nbsp;</a></li>'
   );
 }
 
@@ -102,7 +104,6 @@ var getOfflineFeed = function(url) {
   script.setAttribute('type', 'text/javascript');
   document.documentElement.firstChild.appendChild(script);
 };
-
 
 </script>
 </head>
