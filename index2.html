@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="mobile web apps to give users info in times they really need it: alerts, maps, tzeva adom etc'">
   <meta name="author" content="Ido Green">
-  
+
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
   <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
@@ -17,29 +17,25 @@
 var maxItems = 25;
 
 $( document ).bind( 'pageinit', function(){
-  $.mobile.loader.prototype.options.text = "loading";
-  $.mobile.loader.prototype.options.textVisible = false;
-  $.mobile.loader.prototype.options.theme = "e";
-  $.mobile.loader.prototype.options.html = "";
   
-for(i=1; i <= maxItems; i++){
-  $("#intPages").append(
-  // document.write(
-    '<div data-role="page" id="article' + i + '"> ' +
-    '<div data-role="header" data-position="inline"> ' +
-    '<a href="#list" data-role="button" data-icon="home" data-back="true">Home</a> ' +
-    '<h1 id="articleHeader' + i + '">&nbsp;</h1> ' +
-    '<a href="#" id="openButton' + i + '" data-role="button" data-icon="plus" ' +
-    'class="ui-btn-right" rel="external">Open</a> ' +
-    '</div> <div data-role="content"> ' +
-    '<div id="articleContent' + i + '" class="articleContent"></div> ' +
-    '<div data-role="controlgroup" data-type="horizontal"> ' +
-    '<a href="#article ' + String(i-1) + '" data-role="button" data-icon="arrow-l" ' +
-    'data-inline="true" class="prevButton">Prev</a> ' +
-    '<a href="#article ' + String(i +1)+ '" data-role="button" data-icon="arrow-r" ' +
-    'data-inline="true" class="nextButton" data-iconpos="right">Next</a> </div> + </div> + </div>'
-    );
-  }
+// for(i=1; i <= maxItems; i++){
+//   $("#intPages").append(
+//   // document.write(
+//     '<div data-role="page" id="article' + i + '"> ' +
+//     '<div data-role="header" data-position="inline"> ' +
+//     '<a href="#list" data-role="button" data-icon="home" data-back="true">Home</a> ' +
+//     '<h1 id="articleHeader' + i + '">&nbsp;</h1> ' +
+//     '<a href="#" id="openButton' + i + '" data-role="button" data-icon="plus" ' +
+//     'class="ui-btn-right" rel="external">Open</a> ' +
+//     '</div> <div data-role="content"> ' +
+//     '<div id="articleContent' + i + '" class="articleContent"></div> ' +
+//     '<div data-role="controlgroup" data-type="horizontal"> ' +
+//     '<a href="#article ' + String(i-1) + '" data-role="button" data-icon="arrow-l" ' +
+//     'data-inline="true" class="prevButton">Prev</a> ' +
+//     '<a href="#article ' + String(i +1)+ '" data-role="button" data-icon="arrow-r" ' +
+//     'data-inline="true" class="nextButton" data-iconpos="right">Next</a> </div> + </div> + </div>'
+//     );
+//   }
 
 });
 
@@ -150,6 +146,29 @@ var getOfflineFeed = function(url) {
     </div>
   </div>
 
-  <div id='intPages'></div>
+  <div id='intPages'>
+    <script>
+    for(i=1; i <= maxItems; i++){
+
+      document.write(
+        '<div data-role="page" id="article' + i + '"> ' +
+        '<div data-role="header" data-position="inline"> ' +
+        '<a href="#list" data-role="button" data-icon="home" data-back="true">Home</a> ' +
+        '<h1 id="articleHeader' + i + '">&nbsp;</h1> ' +
+        '<a href="#" id="openButton' + i + '" data-role="button" data-icon="plus" ' +
+        'class="ui-btn-right" rel="external">Open</a> ' +
+        '</div> <div data-role="content"> ' +
+        '<div id="articleContent' + i + '" class="articleContent"></div> ' +
+        '<div data-role="controlgroup" data-type="horizontal"> ' +
+        '<a href="#article ' + String(i-1) + '" data-role="button" data-icon="arrow-l" ' +
+        'data-inline="true" class="prevButton">Prev</a> ' +
+        '<a href="#article ' + String(i +1)+ '" data-role="button" data-icon="arrow-r" ' +
+        'data-inline="true" class="nextButton" data-iconpos="right">Next</a> </div> + </div> + </div>'
+        );
+      }
+
+    </script>
+
+  </div>
 </body>
 </html>
