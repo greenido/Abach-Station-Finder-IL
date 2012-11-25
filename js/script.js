@@ -148,22 +148,21 @@ RocknCoder.Tweet = function () {
         for (i = 0; i < data.results.length; i++) {
           tweet = data.results[i];
           tweet.timeAgo = timeAgo(tweet.created_at);
-          // compiled = _.template(tmpl, tweet);
-          compiled = tweet.text + "<br/>"+tweet.timeAgo;
+
+          compiled = tweet.text + "<br/>" + tweet.timeAgo;
           compiled = replaceURLWithHTMLLinks(compiled);
           tweetsData += "<li><span class='tweetlink'>" + compiled + "</span></li>";
-          // $appendTo.append(compiled);
-          // $appendTo.listview("refresh");
         }
         $("#tweets").append(tweetsData + "</ul>");
         $("#tweets").trigger('create');
       },
       error: function(jqXHR, textStatus, errorThrown){
-        alert("error: "+errorThrown);
+        console.error("Opss... Error: " + errorThrown);
       }
     });
-    // check again in 3 minutes
-    setTimeout(RocknCoder.Tweet.load, 3*60*1000);
+
+    // check again every minute
+    setTimeout(RocknCoder.Tweet.load, 60*1000);
   },
   // format the time returned by Twitter
   timeAgo = function(dateString) {

@@ -2,6 +2,7 @@ AlertsIL
 ========
 
 AlertsIL is a mobile web app to times you need it.
+Temp location: http://goo.gl/tL5xr
 
 Goal
 ====
@@ -12,19 +13,28 @@ Objectives
 Fresh data and alerts in real time.
 Be able to run on most of the mobile devices out there.
 Later: wrap it as native for Android/iOS/Windows
-Features:
+
+Features
+========
+* Tweets
+  * refresh them every 60sec.
+  * Todo - enable the user to customize it.
+  * Todo - built a good list and fetch it as default.
+
 * darom.gov.il data
   * Fetch live Rss feed - http://darom.gov.il/NewsAndArticles/LocalNews/_layouts/rssfeed.aspx
-  * TODO: fetch other important data from http://darom.gov.il/
+  * Add some other feeds from good/quality sources
 
 * RedAlert
   * http://tzeva-adom.com/docs/
   * https://github.com/gadicohen/redalert
   * http://redalert.sveder.com/api/latest
 
+* Todo - create a chrome extension version with notifications.
 
-TODO:
+Use
+===
 * jQueryMobile - http://jquerymobile.com/demos/1.2.0/
 * AngularJS
-* IF we wish a server: php/java ?
+
 
