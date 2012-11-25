@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Alerts IL</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Alerts in Israel">
@@ -48,7 +48,7 @@ for(i=1; i<=maxLength; i++){
     '    <a href="#" id="openButton' + i + '" data-role="button" data-icon="plus"' +
     '      class="ui-btn-right" rel="external">Open</a>' +
     '  </div>' + '  <div data-role="content">' +
-    '    <div id="articleContent' + i + '" class="articleContent"></div>' +
+    '    <div id="articleContent' + i + '" class="articleContent" style="direction: rtl;"></div>' +
     '    <div data-role="controlgroup" data-type="horizontal">' +
     '      <a href="#article' + String(i-1) + '" data-role="button" data-icon="arrow-l"' +
     '        data-inline="true" class="prevButton">Back</a>' +
@@ -58,9 +58,15 @@ for(i=1; i<=maxLength; i++){
   );
 }
 
-// use y! pipes for caching and easy mange to the feeds
+// use y! pipes for caching and easy mange to the feeds:
+// parse them and fetch some more data base on the basic entries.
+//
 $(function(){
-  getOnlineFeed('http://pipes.yahoo.com/pipes/pipe.run?_id=866c24404f4ae093008efc6cff7d0d09&_render=rss')
+
+  // to skip pipes cache during dev mode - TODO remove it in prod!
+  var tmpRand = Math.floor((Math.random()*10000000)+1);
+  getOnlineFeed('http://pipes.yahoo.com/pipes/pipe.run?_id=866c24404f4ae093008efc6cff7d0d09' +
+      '&_randomstuff='+ tmpRand +'&_render=rss')
 });
 
 /* helpers */
@@ -73,10 +79,20 @@ var listEntries = function(json) {
   
   for (var i = 1; i <= articleLength ; i++) {
     var entry = json.responseData.feed.entries[i-1];
+
+    var tmpLink = entry.link;
+    // if (tmpLink.indexOf("..") > -1) {
+    //   tmpLink = tmpLink.replace("../", "");
+    //   tmpLink = "http://darom.gov.il/NewsAndArticles/LocalNews/" + tmpLink;
+    // }
+
     $('#link' + i).text(entry.title);
     $('#articleHeader' + i).text(entry.title);
-    $('#openButton' + i).attr('href', entry.link);
-    $('#articleContent' + i).append(entry.content);
+    $('#openButton' + i).attr('href', tmpLink);
+
+
+    var desc = entry.content.replace(/(<([^>]+)>)/ig,"");
+    $('#articleContent' + i).append(desc);
   }
 
   $('#article1 .prevButton').remove();
