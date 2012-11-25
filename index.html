@@ -19,7 +19,7 @@ var maxLength = 20;
 
 // TODO - change it to something better with append
 document.write(
-  '<div data-role="page" id="list">' +
+  '<div data-role="page" data-theme="e" id="list">' +
   '<div data-role="header" data-position="fixed">' +
   '<h1><span id="widgetTitle">Alerts IL</span> ' +
   '<span style="font-size: x-small">(2012)</span></h1>' +
@@ -41,20 +41,20 @@ document.write('</ul>' + '  </div>' +'</div>');
 
 for(i=1; i<=maxLength; i++){
   document.write(
-    '<div data-role="page" id="article' + i + '">' +
-    '  <div data-role="header" data-position="inline">' +
-    '    <a href="#list" data-role="button" data-icon="grid" data-back="true">Main</a>' +
-    '    <h1 id="articleHeader' + i + '">&nbsp;</h1>' +
-    '    <a href="#" id="openButton' + i + '" data-role="button" data-icon="plus"' +
+    '<div data-role="page" data-theme="e" id="article' + i + '">' +
+    ' <div data-role="header" data-theme="d" data-position="inline">' +
+    '   <a href="#list" data-role="button" data-icon="grid" data-back="true">Main</a>' +
+    '   <h1 id="articleHeader' + i + '">&nbsp;</h1>' +
+    '   <a href="#" id="openButton' + i + '" data-role="button" data-icon="plus"' +
     '      class="ui-btn-right" rel="external">Open</a>' +
-    '  </div>' + '  <div data-role="content">' +
+    '   </div>' + '  <div data-role="content">' +
     '    <div id="articleContent' + i + '" class="articleContent" style="direction: rtl;"></div>' +
-    '    <div data-role="controlgroup" data-type="horizontal">' +
+    '      <div data-role="controlgroup" data-type="horizontal" style="direction: rtl;">' +
     '      <a href="#article' + String(i-1) + '" data-role="button" data-icon="arrow-l"' +
     '        data-inline="true" class="prevButton">Back</a>' +
     '      <a href="#article' + String(i+1) + '" data-role="button" data-icon="arrow-r"' +
     '        data-inline="true" class="nextButton" data-iconpos="right">Next</a>' +
-    '    </div>' +    '  </div>' +    '</div>'
+    '   </div> </div> </div>'
   );
 }
 
@@ -64,16 +64,18 @@ for(i=1; i<=maxLength; i++){
 $(function(){
 
   // to skip pipes cache during dev mode - TODO remove it in prod!
-  var tmpRand = Math.floor((Math.random()*10000000)+1);
+  var tmpRand = 1; //Math.floor((Math.random()*10000000)+1);
   getOnlineFeed('http://pipes.yahoo.com/pipes/pipe.run?_id=866c24404f4ae093008efc6cff7d0d09' +
       '&_randomstuff='+ tmpRand +'&_render=rss')
-});
+  });
 
 /* helpers */
 var listEntries = function(json) {
-  if (!json.responseData.feed.entries) return false;
-  
-  $('#widgetTitle').text(json.responseData.feed.title);
+  if (!json.responseData.feed.entries) {
+    console.error("could not fetch the items from our feed");
+    return false;
+  } 
+    
   var articleLength = json.responseData.feed.entries.length;
   articleLength     = (articleLength > maxLength) ? maxLength : articleLength;
   
@@ -89,6 +91,7 @@ var listEntries = function(json) {
     $('#link' + i).text(entry.title);
     $('#articleHeader' + i).text(entry.title);
     $('#openButton' + i).attr('href', tmpLink);
+    $('#openButton' + i).attr('target', "_blank");
 
 
     var desc = entry.content.replace(/(<([^>]+)>)/ig,"");
