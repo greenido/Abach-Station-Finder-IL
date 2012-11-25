@@ -19,14 +19,15 @@ var maxLength = 20;
 
 // TODO - change it to something better with append
 document.write(
-  '<div data-role="page" data-theme="e" id="list">' +
+  '<div data-role="page" id="mainstuff" data-theme="e" id="list">' +
   '<div data-role="header" data-position="fixed">' +
-  '<a href="#" data-icon="alert" class="ui-btn-left">Info</a> <h1><span id="widgetTitle">Alerts IL</span> ' +
+  '<a href="#" data-icon="alert" class="ui-btn-left">Info</a> <h1><span id="widgetTitle">Alerts IL</span>' +
   '<span style="font-size: x-small">(2012)</span></h1>' +
   '<a href="#" data-icon="gear" class="ui-btn-right"> Options</a>' +
-  '</div>' +
-  '<div data-role="content">' +
-  '<ul data-role="listview" id="articleList">'
+  '</div>' +  '<div data-role="content">' +
+  '<ul data-role="listview" id="articleList">' +
+  '<div data-role="footer" data-theme="c"> <div data-role="navbar" data-iconpos="bottom">' +
+  '<ul><li><a href="#map" data-icon="forward">Map</a></li> <li><a href="#" data-icon="info">Send</a></li> <li><a href="#" data-icon="search">Tweets</a></li> </ul>' +  ' </div><!-- navbar --> </div>'
 );
 
 // add the list of alerts
@@ -38,7 +39,7 @@ for(var i=1; i<=maxLength; i++){
   );
 }
 
-document.write('</ul>' + '  </div>' +'</div>');
+document.write('</ul>' + '  </div>' +'</div>' );
 
 for(i=1; i<=maxLength; i++){
   document.write(
@@ -129,6 +130,21 @@ var getOfflineFeed = function(url) {
 </head>
 
 <body>
-.
+
+
+<div data-role="page" id="map" data-theme="d">
+  <div data-role="header">
+    <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a> 
+    <h1>Map</h1>
+  </div><!-- /header -->
+  <div data-role="content" data-theme="a">  
+    <p><iframe src="http://redalert.sveder.com/" frameborder="0" width="100%" height="600px"/></p>  
+    <p><a href="#mainstuff" data-direction="reverse" data-role="button" data-theme="b">Main</a></p> 
+  </div><!-- /content -->
+  
+  <div data-role="footer">
+    <h4>@greenido</h4>
+  </div><!-- /footer -->
+</div><!-- /page two -->
 </body>
 </html>
