@@ -10,6 +10,13 @@
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
   <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  
+  <style>
+    .tweetlink {
+      font-size: 90%;
+    }
+    
+  </style>
   <script>
 
 // forked from r http://jsdo.it/rotsuya/411c
@@ -160,7 +167,8 @@ RocknCoder.Tweet = function () {
           tweet.timeAgo = timeAgo(tweet.created_at);
           // compiled = _.template(tmpl, tweet);
           compiled = tweet.text + "<br/>"+tweet.timeAgo;
-          tweetsData += "<li>" + compiled + "</li>";
+          compiled = replaceURLWithHTMLLinks(compiled);
+          tweetsData += "<li><span class='tweetlink'>" + compiled + "</span></li>";
           // $appendTo.append(compiled);
           // $appendTo.listview("refresh");
         }
@@ -235,6 +243,11 @@ RocknCoder.Tweet = function () {
 
 RocknCoder.Tweet.load("%23israel");
 
+// util functions
+function replaceURLWithHTMLLinks(text) {
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(exp,"<a href='$1'>$1</a>"); 
+}
 </script>
 
 
