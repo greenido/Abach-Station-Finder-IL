@@ -35,10 +35,10 @@ for(i=1; i<=maxLength; i++){
   document.write(
     '<div data-role="page" data-theme="e" id="article' + i + '">' +
     ' <div data-role="header" data-theme="d" data-position="inline">' +
-    '   <a href="#list" data-role="button" data-icon="grid" data-back="true">Main</a>' +
+    '   <a href="#mainstuff" data-role="button" data-icon="grid" data-back="true">Home</a>' +
     '   <h1 id="articleHeader' + i + '">&nbsp;</h1>' +
-    '   <a href="#" id="openButton' + i + '" data-role="button" data-icon="plus"' +
-    '      class="ui-btn-right" rel="external">Open</a>' +
+    '   <a href="#" id="openButton' + i + '" data-role="button" data-icon="forward"' +
+    '      class="ui-btn-right" rel="external">Source</a>' +
     '   </div>' + '  <div data-role="content">' +
     '    <div id="articleContent' + i + '" class="articleContent" style="direction: rtl;"></div>' +
     '      <div data-role="controlgroup" data-type="horizontal" style="direction: rtl;">' +
