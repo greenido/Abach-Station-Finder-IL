@@ -1,0 +1,63 @@
+/* ===== Primary Styles ========================================================
+   Author: Ido Green
+   plus.ly/greenido
+   @greenido
+
+   ========================================================================== */
+.tweetlink {
+  font-size: 90%;
+}
+    
+.hero-unit {
+  padding-top: 1em;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0.5em;
+}
+
+.rgRow {
+  height: 4em;
+}
+
+.btn-large {
+  margin-top: 0.5em;
+  margin-left: 0.8em;
+  margin-right: 0.3em;
+}
+
+#plusone {
+  padding-top: 7px;
+}
+
+.x-but {
+  margin-left: 1em;
+}
+
+.sml-font {
+  font-size: 80%;
+}
+
+.logo-img {
+  float:left;
+  display:inline;
+  padding: 2px;
+}
+
+#airhtml {
+  background: lightcyan;
+  padding: 0.5em;
+  border-radius: 15px;
+
+}
+
+.ui-bar-a {
+  background-image: -webkit-linear-gradient(#3C3C3C,#7E110F);
+  background-image: -moz-linear-gradient(#3C3C3C,#7E110F);
+  background-image: -ms-linear-gradient(#3C3C3C,#7E110F);
+  background-image: -o-linear-gradient(#3C3C3C,#7E110F);
+  color: yellow;
+}
+
+.ui-header {
+  font-size: 150%;
+}
