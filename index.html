@@ -151,19 +151,20 @@ RocknCoder.Tweet = function () {
       success: function(data, textStatus, xhr) {
         var i, tweet, compiled;
         // clear all old tweets but not the search row
-        $("#tweets").html("<ul data-role='listview'>");
+        $("#tweets").html("");
 
         // add info
+        var tweetsData = "<ul data-role='listview'>";
         for (i = 0; i < data.results.length; i++) {
           tweet = data.results[i];
           tweet.timeAgo = timeAgo(tweet.created_at);
           // compiled = _.template(tmpl, tweet);
           compiled = tweet.text + "<br/>"+tweet.timeAgo;
-          $("#tweets").append("<li>" + compiled + "</li>");
+          tweetsData += "<li>" + compiled + "</li>";
           // $appendTo.append(compiled);
           // $appendTo.listview("refresh");
         }
-        $("#tweets").appendTo("</ul>");
+        $("#tweets").append(tweetsData + "</ul>");
         $("#tweets").trigger('create');
       },
       error: function(jqXHR, textStatus, errorThrown){
@@ -232,7 +233,7 @@ RocknCoder.Tweet = function () {
   };
 }();
 
-RocknCoder.Tweet.load("#israel");
+RocknCoder.Tweet.load("%23israel");
 
 </script>
 
@@ -275,9 +276,10 @@ RocknCoder.Tweet.load("#israel");
     <div data-role="header">
       <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
       <h1>Tweets</h1>
+      <a href="#mainstuff" data-icon="refresh" class="ui-btn-right">Refresh</a>
     </div>
     <!-- /header -->
-    <div id="tweets" data-role="content" data-theme="a">
+    <div id="tweets" data-role="content" data-theme="d">
        <p>
         TODO
       </p>
