@@ -134,6 +134,7 @@ RocknCoder.Tweet = function () {
   // load data from twitter
   load = function(search) {
     searchTerm = search || searchTerm;
+    $.mobile.showPageLoadingMsg();
     $.ajax({
       url: 'http://search.twitter.com/search.json?q='+searchTerm,
       type: 'GET',
@@ -142,7 +143,7 @@ RocknCoder.Tweet = function () {
         var i, tweet, compiled;
         // clear all old tweets but not the search row
         $("#tweets").html("");
-
+        $.mobile.hidePageLoadingMsg();
         // add info
         var tweetsData = "<ul data-role='listview'>";
         for (i = 0; i < data.results.length; i++) {
@@ -158,6 +159,7 @@ RocknCoder.Tweet = function () {
       },
       error: function(jqXHR, textStatus, errorThrown){
         console.error("Opss... Error: " + errorThrown);
+        $.mobile.hidePageLoadingMsg();
       }
     });
 
@@ -223,7 +225,21 @@ RocknCoder.Tweet = function () {
   };
 }();
 
-RocknCoder.Tweet.load("%23israel");
+//
+// start of the party
+//
+$(document).on('pageinit','[data-role=page]', function(){
+
+  console.log("--start the party--");
+  $.mobile.touchOverflowEnabled = true;
+  RocknCoder.Tweet.load("%23israel");
+
+  $("#refreshTweets").click(function(){
+    RocknCoder.Tweet.load();
+  });
+
+});
+
 
 // util functions
 function replaceURLWithHTMLLinks(text) {
