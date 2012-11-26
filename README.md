@@ -26,15 +26,13 @@ Features
   * Add some other feeds from good/quality sources
 
 * RedAlert
-  * http://tzeva-adom.com/docs/
   * https://github.com/gadicohen/redalert
-  * http://redalert.sveder.com/api/latest
 
 * Todo - create a chrome extension version with notifications.
 
 Use
 ===
-* jQueryMobile - http://jquerymobile.com/demos/1.2.0/
-* AngularJS
+* jQueryMobile - http://jquerymobile.com/1.2.0/
+* Todo - AngularJS
 
 
