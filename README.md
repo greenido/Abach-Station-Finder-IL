@@ -28,7 +28,9 @@ Features
 * RedAlert
   * https://github.com/gadicohen/redalert
 
-* Todo - create a chrome extension version with notifications.
+* Todo:
+  * Use http://fabien-d.github.com/alertify.js/ for notifications.
+  * create a chrome extension version with notifications.
 
 Use
 ===

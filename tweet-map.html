@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Alerts IL - Tweet to Map</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Alerts in Israel">
+    <meta name="author" content="Ido Green | greenido.wordpress.com | @greenido">
+
+    <!-- css -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    
+    <!-- js -->
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+    <style type="text/css">
+      /*html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }*/
+      #map_canvas { 
+        height: 600px;
+      }
+      #bodyContent {
+        background-color: yellow;
+        padding: 1em;
+      }
+      #tweetContent {
+        width: 250px;
+      }
+    </style>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_mrsCOGa_cip-_O9YzmruYQ831uQcqPE&sensor=true">
+    </script>
+    <script>
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(32.07, 34.8),
+          zoom: 10,
+          streetViewControl: true,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+        fetchAndDraw("israel");
+      }
+
+      function addMarker(tmpLong, tmpLat, tweet) {
+        console.log ("-- going to put marker on: " +tmpLong + ", " +tmpLat);
+        var myLatlng = new google.maps.LatLng(tmpLong, tmpLat);
+        var mapOptions = {
+          zoom: 9,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+        }
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        var goldStar = {
+          path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+          fillColor: "red",
+          fillOpacity: 0.4,
+          scale: 0.1,
+          strokeColor: "gold",
+          strokeWeight: 14
+        };
+        tweet['marker'] = new google.maps.Marker({
+            position: myLatlng,
+            //icon: goldStar,
+            // { path: google.maps.SymbolPath.CIRCLE, scale: 6  },
+            title:"Rocket zone"
+        });
+
+        tweet['contentString'] = '<div id="tweetContent">'+
+          '<img src="' + tweet.profile_image_url + '" style="float:left; padding-right:0.5em"/>' + 
+          '<h3>'+ tweet.from_user +'</h3>'+
+          '<div id="bodyContent">'+
+          tweet.text +
+          '<br/><small>Created at: ' + tweet.created_at + '</small>'+
+          '</div></div>';
+
+        tweet['infowindow'] = new google.maps.InfoWindow({
+          content: tweet.contentString
+        });
+
+        google.maps.event.addListener(tweet.marker, 'click', function() {
+          tweet.infowindow.open(map, tweet.marker);
+        });
+
+        // To add the marker to the map, call setMap();
+        tweet.marker.setMap(map);
+
+      }
+      
+      $(document).on('pageinit','[data-role=page]', function(){
+
+        console.log("--start the map party--");
+        $.mobile.touchOverflowEnabled = true;
+        
+        
+
+        $("#addMarker").click(function() {
+          addMarker(32.07, 34.8, tweet);
+        });
+
+      });
+
+      // tune the fetching of relevate tweets
+      function fetchAndDraw(searchTerm) {
+          $.mobile.showPageLoadingMsg();
+          $.ajax({
+            url: 'http://search.twitter.com/search.json?geocode=32.781157,34.398720,50mi&rpp=100&q='+searchTerm,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function(data, textStatus, xhr) {
+              var i;
+              $.mobile.hidePageLoadingMsg();
+              for (i = 0; i < data.results.length; i++) {
+                var tweet = data.results[i];
+                if (tweet.geo != null) {
+                  addMarker(tweet.geo.coordinates[0], tweet.geo.coordinates[1], tweet);
+                }
+                else {
+                  // TODO: translate from location to long/lat
+                  //console.log("no geo but location: " + tweet.location);
+                }
+              }
+              // var bounds = new google.maps.LatLngBounds();
+              // // in the marker-drawing loop:
+              // bounds.extend(pos);
+              // // after the loop:
+              // map.fitBounds(bounds);
+
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+              console.error("Opss... Error: " + errorThrown);
+              $.mobile.hidePageLoadingMsg();
+            }
+          });
+
+          // check again every minute
+          setTimeout(fetchAndDraw, 60000);
+        }
+      
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas" style="width:880px; height:800px;"></div>
+    <button id="addMarker">Add Marker</button>
+  </body>
+</html>
