@@ -38,6 +38,9 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_mrsCOGa_cip-_O9YzmruYQ831uQcqPE&sensor=true">
     </script>
     <script>
+      var map;
+      var markersArray = [];
+
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng(32.07, 34.8),
@@ -45,7 +48,7 @@
           streetViewControl: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        map = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
 
         fetchAndDraw("israel");
@@ -54,29 +57,18 @@
       function addMarker(tmpLong, tmpLat, tweet) {
         console.log ("-- going to put marker on: " +tmpLong + ", " +tmpLat);
         var myLatlng = new google.maps.LatLng(tmpLong, tmpLat);
-        var mapOptions = {
-          zoom: 9,
-          center: myLatlng,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-        }
-        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-        var goldStar = {
-          path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
-          fillColor: "red",
-          fillOpacity: 0.4,
-          scale: 0.1,
-          strokeColor: "gold",
-          strokeWeight: 14
-        };
+        var alertIcon = "img/alert-60-50.png";
         tweet['marker'] = new google.maps.Marker({
             position: myLatlng,
-            //icon: goldStar,
-            // { path: google.maps.SymbolPath.CIRCLE, scale: 6  },
+            mpa: map,
+            icon: alertIcon,
             title:"Rocket zone"
         });
+        markersArray.push(tweet['marker']);
 
+        // todo - add option to click on links
         tweet['contentString'] = '<div id="tweetContent">'+
-          '<img src="' + tweet.profile_image_url + '" style="float:left; padding-right:0.5em"/>' + 
+          '<img src="' + tweet.profile_image_url + '" style="float:left; width: 56px; height:56px; padding-right:0.5em"/>' + 
           '<h3>'+ tweet.from_user +'</h3>'+
           '<div id="bodyContent">'+
           tweet.text +
@@ -91,20 +83,28 @@
           tweet.infowindow.open(map, tweet.marker);
         });
 
-        // To add the marker to the map, call setMap();
+        // To add the marker to the map, call setMap();        
         tweet.marker.setMap(map);
 
       }
       
-      $(document).on('pageinit','[data-role=page]', function(){
+      function clearOverlays() {
+        if (markersArray) {
+          for (i in markersArray) {
+            markersArray[i].setMap(null);
+          }
+        }
+      }
 
+
+      $(document).on('pageinit','[data-role=page]', function(){
         console.log("--start the map party--");
         $.mobile.touchOverflowEnabled = true;
         
-        
-
-        $("#addMarker").click(function() {
-          addMarker(32.07, 34.8, tweet);
+        $("#reload").click(function() {
+          clearOverlays();
+          // to 'url' the strings
+          fetchAndDraw($("#tweetSearch").val());
         });
 
       });
@@ -149,7 +149,13 @@
     </script>
   </head>
   <body onload="initialize()">
-    <div id="map_canvas" style="width:880px; height:800px;"></div>
-    <button id="addMarker">Add Marker</button>
+    <div id="map_canvas" style="width:90%; height:600px;"></div>
+
+    <div data-role="fieldcontain">
+      <label for="tweetSearch">Search:</label>
+      <input type="text" name="tweetSearch" id="tweetSearch" value="" />
+    </div>  
+
+    <button id="reload">Go</button>
   </body>
 </html>
