@@ -23,7 +23,31 @@
 
 <body>
   <!-- Here our js will do the magic and put content -->
-
+<div data-role="page" id="tweet" data-theme="d">
+    <div data-role="header">
+      <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
+      <h1>Tweets</h1>
+      <a href="#" id="refreshTweets" data-icon="refresh" class="ui-btn-right">Refresh</a>
+    </div>
+    <!-- /header -->
+    <div id="tweets" data-role="content" data-theme="d">
+       <p>    
+      </p>
+      <p>
+        <a href="#mainstuff" data-direction="reverse" data-role="button" data-theme="b">Main</a>
+      </p>
+    </div>
+    <!-- /content -->
+    <div data-role="footer">
+      <h4>
+        <span class="ui-btn-center">
+          <img src="img/alert-60-50.png" alt="alertIL icon" />
+        </span>
+      </h4>
+    </div>  <!-- <a href="http://plus.ly/greenido" target="_blank">+greenido</a> /footer --> 
+  </div>
+  <!-- /page tweet -->
+  
   <div data-role="page" id="map" data-theme="d">
     <div data-role="header">
       <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
@@ -32,9 +56,7 @@
     <!-- /header -->
     <div data-role="content" data-theme="a">
       <!-- TODO: check with sveder on mobile version for his map -->
-    
-        <iframe src="tweet-map.html" frameborder="0" width="100%" height="800px"/>
-     
+       <iframe src="tweet-map.html" frameborder="0" width="100%" height="800px"/>
       <p>
         <a href="#mainstuff" data-direction="reverse" data-role="button" data-theme="b">Main</a>
       </p>
@@ -49,32 +71,7 @@
     </div><!-- /footer --> 
   </div><!-- /page Map -->
 
-  <div data-role="page" id="tweet" data-theme="d">
-    <div data-role="header">
-      <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
-      <h1>Tweets</h1>
-      <a href="#" id="refreshTweets" data-icon="refresh" class="ui-btn-right">Refresh</a>
-    </div>
-    <!-- /header -->
-    <div id="tweets" data-role="content" data-theme="d">
-       <p>
-        TODO
-      </p>
-      <p>
-        <a href="#mainstuff" data-direction="reverse" data-role="button" data-theme="b">Main</a>
-      </p>
-    </div>
-    <!-- /content -->
-
-    <div data-role="footer">
-      <h4>
-        <span class="ui-btn-center">
-          <img src="img/alert-60-50.png" alt="alertIL icon" />
-        </span>
-      </h4>
-    </div>  <!-- <a href="http://plus.ly/greenido" target="_blank">+greenido</a> /footer --> 
-  </div>
-  <!-- /page tweet -->
+  
 
   <script>
     var _gaq=[['_setAccount','UA-27750723-1'],['_trackPageview']];
