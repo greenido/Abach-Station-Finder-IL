@@ -27,8 +27,9 @@
 </head>
 
 <body>
-  <!-- Here our js will do the magic and put content -->
-<div data-role="page" id="tweet" data-theme="d">
+
+  <!-- Tweets/Alerts Page -->
+  <div data-role="page" id="tweet" data-theme="d">
     <div data-role="header">
       <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
       <h1>Tweets</h1>
@@ -79,7 +80,37 @@
     </div><!-- /footer --> 
   </div><!-- /page Map -->
 
-  
+  <!-- Options -->
+  <div data-role="page" id="options" data-theme="d">
+    <div data-role="header">
+      <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
+      <h1>Options</h1>
+    </div>
+    <!-- /header -->
+    <div data-role="content" data-theme="a">
+      <div data-role="fieldcontain">
+       <label for="select-radius" class="select">Tweets Radius:</label>
+       <select name="select-radius" id="select-radius">
+          <option value="10">10km</option>
+          <option value="20">20km</option>
+          <option value="30">30km</option>
+          <option value="40">40km</option>
+          <option value="50">50km</option>
+          <option value="75">75km</option>
+          <option value="100">190km</option>
+          <option value="500">500km</option>
+       </select>
+       <label for="tweet-term" class="select">Tweets:</label>
+       <input id="tweet-term" name="tweet-term" />
+      </div>
+    </div>  <!-- /content -->
+    <div data-role="footer">
+      <h4>
+        2012
+        <a href="http://plus.ly/greenido" target="_blank">+greenido</a>
+      </h4>
+    </div><!-- /footer --> 
+  </div><!-- /page Options -->
 
   <script>
     var _gaq=[['_setAccount','UA-27750723-1'],['_trackPageview']];

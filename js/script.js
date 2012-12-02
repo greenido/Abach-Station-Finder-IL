@@ -13,7 +13,7 @@ document.write(
   '<div data-role="header" data-position="fixed">' +
   '<a href="#" data-icon="alert" class="ui-btn-left">Info</a> <h1><span id="widgetTitle">Alerts IL</span>' +
   //fresh timestemp? '<span style="font-size: x-small">(2012)</span>' +
-  '</h1><a href="#" data-icon="gear" class="ui-btn-right">Options</a>' +
+  '</h1><a href="#options" data-icon="gear" class="ui-btn-right">Options</a>' +
   '</div>' +  '<div data-role="content">' +
   '<ul data-role="listview" id="articleList">' +
   '<div data-role="footer" data-theme="c"> <div data-role="navbar" data-iconpos="bottom">' +
