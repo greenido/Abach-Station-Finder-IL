@@ -34,6 +34,12 @@
       #tweetContent {
         width: 250px;
       }
+      .userTweet {
+        background-color: #F1F162;
+        font-size: 110%;
+        padding: 6px;
+        font-weight: bold;
+      }
     </style>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_mrsCOGa_cip-_O9YzmruYQ831uQcqPE&sensor=true">
@@ -41,6 +47,7 @@
     <script>
       var map;
       var markersArray = [];
+      var lastInfoWin;
 
       function initialize() {
         var mapOptions = {
@@ -70,7 +77,8 @@
         // todo - add option to click on links
         tweet['contentString'] = '<div id="tweetContent">'+
           '<img src="' + tweet.profile_image_url + '" style="float:left; width: 56px; height:56px; padding-right:0.5em"/>' + 
-          '<h3>'+ tweet.from_user +'</h3>'+
+          '<span class="userTweet"><a href="https://twitter.com/'+ tweet.from_user + '" target="_blank">' + 
+          tweet.from_user +'</a></span>'+
           '<div id="bodyContent">'+
           tweet.text +
           '<br/><small>Created at: ' + tweet.created_at + '</small>'+
@@ -81,7 +89,11 @@
         });
 
         google.maps.event.addListener(tweet.marker, 'click', function() {
+          if (lastInfoWin) {
+            lastInfoWin.close();
+          }
           tweet.infowindow.open(map, tweet.marker);
+          lastInfoWin = tweet.infowindow;
         });
 
         // To add the marker to the map, call setMap();        
@@ -112,6 +124,7 @@
 
       // tune the fetching of relevate tweets
       function fetchAndDraw(searchTerm) {
+          var searchTerm = encodeURI(searchTerm);
           $.mobile.showPageLoadingMsg();
           $.ajax({
             url: 'http://search.twitter.com/search.json?geocode=32.781157,34.398720,50mi&rpp=100&q='+searchTerm,
@@ -120,22 +133,21 @@
             success: function(data, textStatus, xhr) {
               var i;
               $.mobile.hidePageLoadingMsg();
+              var bounds = new google.maps.LatLngBounds();
               for (i = 0; i < data.results.length; i++) {
                 var tweet = data.results[i];
                 if (tweet.geo != null) {
                   addMarker(tweet.geo.coordinates[0], tweet.geo.coordinates[1], tweet);
+                  var pos = new google.maps.LatLng(tweet.geo.coordinates[0], tweet.geo.coordinates[1]);
+                  bounds.extend(pos);
                 }
                 else {
                   // TODO: translate from location to long/lat
                   //console.log("no geo but location: " + tweet.location);
                 }
               }
-              // var bounds = new google.maps.LatLngBounds();
-              // // in the marker-drawing loop:
-              // bounds.extend(pos);
-              // // after the loop:
-              // map.fitBounds(bounds);
-
+              // make sure our map is AROUND all the tweets
+              map.fitBounds(bounds);
             },
             error: function(jqXHR, textStatus, errorThrown){
               console.error("Opss... Error: " + errorThrown);
@@ -150,7 +162,7 @@
     </script>
   </head>
   <body onload="initialize()">
-    <div id="map_canvas" style="width:100%; height:600px;"></div>
+    <div id="map_canvas" style="width:100%; height:400px;"></div>
 
     <div data-role="fieldcontain">
       <label for="tweetSearch">Search:</label>
