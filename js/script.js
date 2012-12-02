@@ -50,15 +50,17 @@ for(i=1; i<=maxLength; i++){
   );
 }
 
+//
 // use y! pipes for caching and easy mange to the feeds:
 // parse them and fetch some more data base on the basic entries.
 //
 $(function(){
 
-  // to skip pipes cache during dev mode - TODO remove it in prod!
-  var tmpRand = 1; //Math.floor((Math.random()*10000000)+1);
+  // to skip pipes cache during dev mode - TODO remove it in prod
+  //var tmpRand = Math.floor((Math.random()*10000000)+1);
   getOnlineFeed('http://pipes.yahoo.com/pipes/pipe.run?_id=866c24404f4ae093008efc6cff7d0d09' +
-      '&_randomstuff='+ tmpRand +'&_render=rss')
+  //    '&_randomstuff='+ tmpRand +
+      '&_render=rss')
   });
 
 /* helpers */
@@ -75,18 +77,15 @@ var listEntries = function(json) {
     var entry = json.responseData.feed.entries[i-1];
 
     var tmpLink = entry.link;
-    // if (tmpLink.indexOf("..") > -1) {
-    //   tmpLink = tmpLink.replace("../", "");
-    //   tmpLink = "http://darom.gov.il/NewsAndArticles/LocalNews/" + tmpLink;
-    // }
-
     $('#link' + i).text(entry.title);
     $('#articleHeader' + i).text(entry.title);
     $('#openButton' + i).attr('href', tmpLink);
     $('#openButton' + i).attr('target', "_blank");
 
-
-    var desc = entry.content.replace(/(<([^>]+)>)/ig,"");
+    var pubDate = RocknCoder.Tweet.timeAgo(entry.publishedDate);
+    var desc = entry.content.replace(/(<\/p><\/span>[\s\S]*)/img,"");
+    desc = desc.replace(/(<([^>]+)>)/ig,"");
+    desc += "<br/><span>" + pubDate + "</span>";
     $('#articleContent' + i).append(desc);
   }
 
@@ -188,7 +187,7 @@ RocknCoder.Tweet = function () {
     }
 
     if (diff < minute) {
-      return Math.floor(diff / second) + " seconds ago";
+      return "about " + Math.floor(diff / second) + " seconds ago";
     }
 
     if (diff < minute * 2) {
@@ -196,7 +195,7 @@ RocknCoder.Tweet = function () {
     }
 
     if (diff < hour) {
-      return Math.floor(diff / minute) + " minutes ago";
+      return "about " + Math.floor(diff / minute) + " minutes ago";
     }
 
     if (diff < hour * 2) {
@@ -204,7 +203,7 @@ RocknCoder.Tweet = function () {
     }
 
     if (diff < day) {
-      return  Math.floor(diff / hour) + " hours ago";
+      return  "about " + Math.floor(diff / hour) + " hours ago";
     }
 
     if (diff > day && diff < day * 2) {
@@ -212,15 +211,16 @@ RocknCoder.Tweet = function () {
     }
 
     if (diff < day * 365) {
-      return Math.floor(diff / day) + " days ago";
+      return "about " + Math.floor(diff / day) + " days ago";
     }
     else {
       return "over a year ago";
     }
   };
-  // only one function is visible, the load function
+  
   return {
     load: load,
+    timeAgo: timeAgo,
     init: init
   };
 }();
@@ -244,7 +244,7 @@ $(document).on('pageinit','[data-role=page]', function(){
 // util functions
 function replaceURLWithHTMLLinks(text) {
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    return text.replace(exp,"<a href='$1'>$1</a>"); 
+    return text.replace(exp,"<a href='$1' target='_blank'>$1</a>"); 
 }
 
 
