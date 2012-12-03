@@ -16,7 +16,7 @@ function initialize() {
 }
 
 function addMarker(tmpLong, tmpLat, tweet) {
-  console.log ("-- going to put marker on: " +tmpLong + ", " +tmpLat);
+  // console.log ("-- going to put marker on: " +tmpLong + ", " +tmpLat);
   var myLatlng = new google.maps.LatLng(tmpLong, tmpLat);
   var alertIcon = "img/alert-60-50.png";
   tweet['marker'] = new google.maps.Marker({
