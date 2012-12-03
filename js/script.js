@@ -5,7 +5,7 @@
 
 
 // configuration
-var maxLength = 20;
+var maxLength = 25;
 
 // TODO - change it to something better with append
 document.write(
@@ -31,7 +31,7 @@ for(var i=1; i<=maxLength; i++){
 
 document.write('</ul>' + '  </div>' +'</div>' );
 
-for(i=1; i<=maxLength; i++){
+for(i = 1; i <= maxLength; i++) {
   document.write(
     '<div data-role="page" data-theme="e" id="article' + i + '">' +
     ' <div data-role="header" data-theme="d" data-position="inline">' +
@@ -57,9 +57,9 @@ for(i=1; i<=maxLength; i++){
 $(function(){
 
   // to skip pipes cache during dev mode - TODO remove it in prod
-  //var tmpRand = Math.floor((Math.random()*10000000)+1);
+  // var tmpRand = Math.floor((Math.random()*100000)+1);
   getOnlineFeed('http://pipes.yahoo.com/pipes/pipe.run?_id=866c24404f4ae093008efc6cff7d0d09' +
-  //    '&_randomstuff='+ tmpRand +
+      // '&_randomstuff='+ tmpRand +
       '&_render=rss')
   });
 
@@ -85,6 +85,14 @@ var listEntries = function(json) {
     var pubDate = RocknCoder.Tweet.timeAgo(entry.publishedDate);
     var desc = entry.content.replace(/(<\/p><\/span>[\s\S]*)/img,"");
     desc = desc.replace(/(<([^>]+)>)/ig,"");
+    if (desc.indexOf("maps.googleapis.com") > -1) {
+      // http://maps.googleapis.com/maps/api/staticmap?center=31.5159%2C34.5951&size=400x400&sensor=false
+      desc = desc.replace(/(http:\/\/maps.googleapis.com.*)/img, 
+         "<img src='$1&zoom=13&markers=color:red%7Ccolor:red%7Clabel:*%7C" + 
+         tmpLink + "' style='margin: 0 auto;'\/>");
+      // &markers=color:red%7Ccolor:red%7Clabel:C%7C40.718217,-73.998284
+    }
+
     desc += "<br/><span>" + pubDate + "</span>";
     $('#articleContent' + i).append(desc);
   }
@@ -116,7 +124,9 @@ var getOfflineFeed = function(url) {
 };
 
 
-// tweet stuff - TODO: move it to another file
+//
+// tweet stuff
+//
 var RocknCoder = RocknCoder || {};
 
 // this is the object that takes care of all of our twitter business
