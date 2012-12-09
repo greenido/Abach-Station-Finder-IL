@@ -88,7 +88,7 @@
     <!-- /header -->
     <div data-role="content" data-theme="a">
       <div data-role="fieldcontain">
-       <label for="select-radius" class="select">Tweets Radius:</label>
+       <label for="select-radius" class="select">Tweets Radius</label>
        <select name="select-radius" id="select-radius">
           <option value="10">10km</option>
           <option value="20">20km</option>
@@ -99,9 +99,12 @@
           <option value="100">190km</option>
           <option value="500">500km</option>
        </select>
-       <label for="tweet-term" class="select">Tweets:</label>
-       <input id="tweet-term" name="tweet-term" />
+       
+       <label>Search for hashtags, terms and users</label><br/>
+       <label for="tweet-term" class="select" value="">Tweets</label>
+       <input id="tweet-term" type="search" name="tweet-term" />
       </div>
+      <a href="#" id="save-options" data-role="button" data-icon="save">Save</a>
     </div>  <!-- /content -->
     <div data-role="footer">
       <h4>

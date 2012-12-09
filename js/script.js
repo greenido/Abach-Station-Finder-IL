@@ -4,8 +4,10 @@
  */
 
 
-// configuration
+// TODO: configuration - some globals that need/must move to encapsulated object
 var maxLength = 25;
+var GtweetSearch;
+var GtweetRaduis;
 
 // TODO - change it to something better with append
 document.write(
@@ -240,18 +242,53 @@ RocknCoder.Tweet = function () {
 //
 $(document).on('pageinit','[data-role=page]', function(){
 
-  console.log("--start the party--");
+  console.log("--start the party--"); 
   $.mobile.touchOverflowEnabled = true;
-  RocknCoder.Tweet.load("%23israel");
-
+  
   $("#refreshTweets").click(function(){
     RocknCoder.Tweet.load();
   });
 
+  $("#save-options").click(function() {
+    // save the options to local storage
+    saveOptions($("#tweet-term").val(), $("#select-radius").val() );
+  }); 
+
+  $( '#options' ).live( 'pageinit',function(event){
+   loadOptions();
+    RocknCoder.Tweet.load(GtweetSearch);
+  });
+  
 });
 
 
-// util functions
+
+//
+// Handle with the options saving them locally for the user with local storage
+// 
+function loadOptions() {
+  GtweetSearch = window.localStorage["tweetSearch"];
+  if (GtweetSearch === undefined) {
+    GtweetSearch = "Israel";
+  }
+  $("#tweet-term").val(GtweetSearch);
+  $("#tweetSearch").val(GtweetSearch); // For the quick map search
+
+  GtweetRaduis = window.localStorage["tweetRadius"];
+  if (GtweetRaduis === undefined) {
+    GtweetRaduis =  50; // default to 50k
+  }
+  $("#select-radius").val(GtweetRaduis);
+  $("#select-radius").selectmenu('refresh');      
+}
+
+// TODO - validate this input
+function saveOptions(search, radius) {
+  localStorage.setItem("tweetSearch", search);
+  localStorage.setItem("tweetRadius", radius);
+}
+
+// Util functions
 function replaceURLWithHTMLLinks(text) {
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
     return text.replace(exp,"<a href='$1' target='_blank'>$1</a>"); 

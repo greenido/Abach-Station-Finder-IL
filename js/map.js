@@ -80,9 +80,12 @@ function fetchAndDraw(searchTerm) {
       for (i = 0; i < data.results.length; i++) {
         var tweet = data.results[i];
         if (tweet.geo != null) {
-          addMarker(tweet.geo.coordinates[0], tweet.geo.coordinates[1], tweet);
-          var pos = new google.maps.LatLng(tweet.geo.coordinates[0], tweet.geo.coordinates[1]);
-          bounds.extend(pos);
+          if (tweet.geo.coordinates[0] > 28 && tweet.geo.coordinates[0] < 34 &&
+             tweet.geo.coordinates[1] > 33 && tweet.geo.coordinates[1] < 35) {
+            addMarker(tweet.geo.coordinates[0], tweet.geo.coordinates[1], tweet);
+            var pos = new google.maps.LatLng(tweet.geo.coordinates[0], tweet.geo.coordinates[1]);
+            bounds.extend(pos);
+          }
         }
         else {
           // TODO: translate from location to long/lat
@@ -108,7 +111,8 @@ $(document).on('pageinit','[data-role=page]', function(){
   $("#reload").click(function() {
     clearOverlays();
     // to 'url' the strings
-    fetchAndDraw($("#tweetSearch").val());
+
+    fetchAndDraw("israel");
   });
 });
 
