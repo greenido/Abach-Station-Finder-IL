@@ -80,6 +80,7 @@ function fetchAndDraw(searchTerm) {
       for (i = 0; i < data.results.length; i++) {
         var tweet = data.results[i];
         if (tweet.geo != null) {
+          // TODO - find a better way to make sure it's from Israel location
           if (tweet.geo.coordinates[0] > 28 && tweet.geo.coordinates[0] < 34 &&
              tweet.geo.coordinates[1] > 33 && tweet.geo.coordinates[1] < 35) {
             addMarker(tweet.geo.coordinates[0], tweet.geo.coordinates[1], tweet);
@@ -111,8 +112,12 @@ $(document).on('pageinit','[data-role=page]', function(){
   $("#reload").click(function() {
     clearOverlays();
     // to 'url' the strings
-
-    fetchAndDraw("israel");
+    if ($('#tweetSearch').val()) {
+      fetchAndDraw($('#tweetSearch').val());
+    }
+    else {
+      fetchAndDraw("israel"); // as a default
+    }
   });
 });
 

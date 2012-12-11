@@ -246,7 +246,7 @@ $(document).on('pageinit','[data-role=page]', function(){
   $.mobile.touchOverflowEnabled = true;
   
   $("#refreshTweets").click(function(){
-    RocknCoder.Tweet.load();
+    RocknCoder.Tweet.load(GtweetSearch);
   });
 
   $("#save-options").click(function() {
@@ -254,14 +254,9 @@ $(document).on('pageinit','[data-role=page]', function(){
     saveOptions($("#tweet-term").val(), $("#select-radius").val() );
   }); 
 
-  $( '#options' ).live( 'pageinit',function(event){
-   loadOptions();
-    RocknCoder.Tweet.load(GtweetSearch);
-  });
-  
+  loadOptions();
+   RocknCoder.Tweet.load(GtweetSearch);
 });
-
-
 
 //
 // Handle with the options saving them locally for the user with local storage
@@ -279,7 +274,9 @@ function loadOptions() {
     GtweetRaduis =  50; // default to 50k
   }
   $("#select-radius").val(GtweetRaduis);
-  $("#select-radius").selectmenu('refresh');      
+  $( '#options' ).live( 'pageinit',function(event){
+    $("#select-radius").selectmenu('refresh');      
+  });
 }
 
 // TODO - validate this input
