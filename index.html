@@ -30,9 +30,9 @@
   <!-- Tweets/Alerts Page -->
   <div data-role="page" id="tweet" data-theme="d">
     <div data-role="header">
-      <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
+      <a href="#mainstuff" data-icon="home" class="ui-btn-left">Main</a>
       <h1>Tweets</h1>
-      <a href="#" id="refreshTweets" data-icon="refresh" class="ui-btn-right">Refresh</a>
+      <a href="#" id="refreshTweets" data-icon="refresh"  data-transition="pop" class="ui-btn-right">Refresh</a>
     </div>
     <!-- /header -->
     <div id="tweets" data-role="content" data-theme="d">
@@ -56,7 +56,7 @@
   <!-- MAP PAGE -->
   <div data-role="page" id="map" data-theme="d">
     <div data-role="header">
-      <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
+      <a href="#mainstuff" data-icon="home" data-transition="pop" class="ui-btn-left">Main</a>
       <h1>Map</h1>
     </div>
     <!-- /header -->
@@ -82,7 +82,7 @@
   <!-- Options -->
   <div data-role="page" id="options" data-theme="d">
     <div data-role="header">
-      <a href="#mainstuff" data-icon="alert" class="ui-btn-left">Info</a>
+      <a href="#mainstuff" data-icon="home" class="ui-btn-left">Main</a>
       <h1>Options</h1>
     </div>
     <!-- /header -->
@@ -99,12 +99,15 @@
           <option value="100">190km</option>
           <option value="500">500km</option>
        </select>
-       
+
        <label>Search for hashtags, terms and users</label><br/>
        <label for="tweet-term" class="select" value="">Tweets</label>
        <input id="tweet-term" type="search" name="tweet-term" />
       </div>
-      <a href="#" id="save-options" data-role="button" data-icon="save">Save</a>
+      <a href="#saveMsg" id="save-options" data-role="button"  data-rel="popup" data-icon="save">Save</a>
+      <div data-role="popup" id="saveMsg">
+        <p>Cool - It's saved.<p>
+      </div>
     </div>  <!-- /content -->
     <div data-role="footer">
       <h4>

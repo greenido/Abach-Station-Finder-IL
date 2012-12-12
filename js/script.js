@@ -13,9 +13,9 @@ var GtweetRaduis;
 document.write(
   '<div data-role="page" id="mainstuff" data-theme="e" id="list">' +
   '<div data-role="header" data-position="fixed">' +
-  '<a href="#" data-icon="alert" class="ui-btn-left">Info</a> <h1><span id="widgetTitle">Alerts IL</span>' +
+  '<h1><span id="widgetTitle">Alerts IL</span>' +
   //fresh timestemp? '<span style="font-size: x-small">(2012)</span>' +
-  '</h1><a href="#options" data-icon="gear" class="ui-btn-right">Options</a>' +
+  '</h1><a href="#options" data-icon="gear" data-transition="slide" class="ui-btn-right">Options</a>' +
   '</div>' +  '<div data-role="content">' +
   '<ul data-role="listview" id="articleList">' +
   '<div data-role="footer" data-theme="c"> <div data-role="navbar" data-iconpos="bottom">' +
@@ -252,10 +252,16 @@ $(document).on('pageinit','[data-role=page]', function(){
   $("#save-options").click(function() {
     // save the options to local storage
     saveOptions($("#tweet-term").val(), $("#select-radius").val() );
+    $("#saveMsg").popup("close");
+    setTimeout(function() { 
+      $.mobile.changePage("#mainstuff");
+      window.scrollTo(0, 1);
+    }, 1500);
+
   }); 
 
   loadOptions();
-   RocknCoder.Tweet.load(GtweetSearch);
+  RocknCoder.Tweet.load(GtweetSearch);
 });
 
 //
