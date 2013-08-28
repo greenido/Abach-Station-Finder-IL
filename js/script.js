@@ -1,6 +1,6 @@
 /* Author: Ido Green
  * @greenido
-*  date: Nov 2012
+*  date: Sep 2013
  */
 
 
@@ -13,13 +13,13 @@ var GtweetRaduis;
 document.write(
   '<div data-role="page" id="mainstuff" data-theme="e" id="list">' +
   '<div data-role="header" data-position="fixed">' +
-  '<h1><span id="widgetTitle">Alerts IL</span>' +
-  //fresh timestemp? '<span style="font-size: x-small">(2012)</span>' +
+  '<h1><span id="widgetTitle">Abach Finder IL</span>' +
   '</h1><a href="#options" data-icon="gear" data-transition="slide" class="ui-btn-right">Options</a>' +
-  '</div>' +  '<div data-role="content">' +
+  '</div><div data-role="content">' +
   '<ul data-role="listview" id="articleList">' +
   '<div data-role="footer" data-theme="c"> <div data-role="navbar" data-iconpos="bottom">' +
-  '<ul><li><a href="#map" data-icon="forward">Map</a></li> <li><a href="#tweet" data-icon="search">Tweets</a></li> </ul>' +  ' </div><!-- navbar --> </div>'
+  '<ul><li><a href="#map" data-icon="forward">Map</a></li> <li><a href="#tweet" data-icon="search">רשימת תחנות</a></li> </ul>' +
+  ' </div><!-- navbar --> </div>'
 );
 
 // add the list of alerts
@@ -146,36 +146,36 @@ RocknCoder.Tweet = function () {
   load = function(search) {
     searchTerm = search || searchTerm;
     $.mobile.showPageLoadingMsg();
-    $.ajax({
-      url: 'http://search.twitter.com/search.json?q='+searchTerm,
-      type: 'GET',
-      dataType: 'jsonp',
-      success: function(data, textStatus, xhr) {
-        var i, tweet, compiled;
-        // clear all old tweets but not the search row
-        $("#tweets").html("");
-        $.mobile.hidePageLoadingMsg();
-        // add info
-        var tweetsData = "<ul data-role='listview'>";
-        for (i = 0; i < data.results.length; i++) {
-          tweet = data.results[i];
-          tweet.timeAgo = timeAgo(tweet.created_at);
-
-          compiled = tweet.text + "<br/>" + tweet.timeAgo;
-          compiled = replaceURLWithHTMLLinks(compiled);
-          tweetsData += "<li><span class='tweetlink'>" + compiled + "</span></li>";
-        }
-        $("#tweets").append(tweetsData + "</ul>");
-        $("#tweets").trigger('create');
-      },
-      error: function(jqXHR, textStatus, errorThrown){
-        console.error("Opss... Error: " + errorThrown);
-        $.mobile.hidePageLoadingMsg();
-      }
-    });
+//    $.ajax({
+//      url: 'http://search.twitter.com/search.json?q='+searchTerm,
+//      type: 'GET',
+//      dataType: 'jsonp',
+//      success: function(data, textStatus, xhr) {
+//        var i, tweet, compiled;
+//        // clear all old tweets but not the search row
+//        $("#tweets").html("");
+//        $.mobile.hidePageLoadingMsg();
+//        // add info
+//        var tweetsData = "<ul data-role='listview'>";
+//        for (i = 0; i < data.results.length; i++) {
+//          tweet = data.results[i];
+//          tweet.timeAgo = timeAgo(tweet.created_at);
+//
+//          compiled = tweet.text + "<br/>" + tweet.timeAgo;
+//          compiled = replaceURLWithHTMLLinks(compiled);
+//          tweetsData += "<li><span class='tweetlink'>" + compiled + "</span></li>";
+//        }
+//        $("#tweets").append(tweetsData + "</ul>");
+//        $("#tweets").trigger('create');
+//      },
+//      error: function(jqXHR, textStatus, errorThrown){
+//        console.error("Opss... Error: " + errorThrown);
+//        $.mobile.hidePageLoadingMsg();
+//      }
+//    });
 
     // check again every minute
-    setTimeout(RocknCoder.Tweet.load, 60*1000);
+//    setTimeout(RocknCoder.Tweet.load, 60*1000);
   },
   // format the time returned by Twitter
   timeAgo = function(dateString) {
@@ -244,10 +244,11 @@ $(document).on('pageinit','[data-role=page]', function(){
 
   console.log("--start the party--"); 
   $.mobile.touchOverflowEnabled = true;
-  
-  $("#refreshTweets").click(function(){
-    RocknCoder.Tweet.load(GtweetSearch);
-  });
+  $.mobile.changePage("#map");
+    
+//  $("#refreshTweets").click(function(){
+//    RocknCoder.Tweet.load(GtweetSearch);
+//  });
 
   $("#save-options").click(function() {
     // save the options to local storage
@@ -261,7 +262,7 @@ $(document).on('pageinit','[data-role=page]', function(){
   }); 
 
   loadOptions();
-  RocknCoder.Tweet.load(GtweetSearch);
+//  RocknCoder.Tweet.load(GtweetSearch);
 });
 
 //

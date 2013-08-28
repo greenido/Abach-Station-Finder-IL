@@ -1,8 +1,8 @@
-AlertsIL
+Abach FinderIL
 ========
 
-AlertsIL is a mobile web app to times you need it.
-Temp location: http://goo.gl/tL5xr
+Abach FinderIL is a mobile web app to times you need it.
+Temp location: TBD
 
 Goal
 ====
@@ -16,21 +16,7 @@ Later: wrap it as native for Android/iOS/Windows
 
 Features
 ========
-* Tweets
-  * refresh them every 60sec.
-  * Todo - enable the user to customize it.
-  * Todo - built a good list and fetch it as default.
-
-* darom.gov.il data
-  * Fetch live Rss feed - http://darom.gov.il/NewsAndArticles/LocalNews/_layouts/rssfeed.aspx
-  * Add some other feeds from good/quality sources
-
-* RedAlert
-  * https://github.com/gadicohen/redalert
-
-* Todo:
-  * Use http://fabien-d.github.com/alertify.js/ for notifications.
-  * create a chrome extension version with notifications.
+TBD
 
 Use
 ===

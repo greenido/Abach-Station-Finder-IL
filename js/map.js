@@ -1,59 +1,92 @@
 var map;
 var markersArray = [];
+var bounds = new google.maps.LatLngBounds();
 var lastInfoWin;
 
 function initialize() {
   var mapOptions = {
-    center: new google.maps.LatLng(32.07, 34.8),
-    zoom: 10,
+    center: new google.maps.LatLng(31.7, 35.1),
+    zoom: 12,
     streetViewControl: true,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById("map_canvas"),
-      mapOptions);
+          mapOptions);
 
-  fetchAndDraw("israel");
+
 }
 
-function addMarker(tmpLong, tmpLat, tweet) {
-  // console.log ("-- going to put marker on: " +tmpLong + ", " +tmpLat);
-  var myLatlng = new google.maps.LatLng(tmpLong, tmpLat);
+/**
+ * This function will be called with all the geo data of the stations
+ * @returns {undefined}
+ */
+function addStations() {
+  var station = new Object;
+  var stationText = "TODO - bal-bla";
+  station.lang = "31.794836";
+  station.long = "35.222949";
+  station.title = "מתנ\"ס שמואל הנביא מגן האלף 3";
+  station.contentString = '<div id="stationContent"><div id="bodyContent">' + station.title + 
+          "<br>" + stationText + 
+          '</div></div>';
+  station.infowindow = new google.maps.InfoWindow({content: station.contentString});
+  addMarker(station.lang, station.long, station);
+  
+  var station = new Object();
+  station.lang = "31.772058";
+  station.long = "35.299141";
+  station.title = "קניון אדומים קומת כניסה משער שלום דרך קדם  5 ";
+  var stationText = "<table><tr style='background-color: #ECECEC;' align='right' dir='rtl'>                                                 <td class='tdrightborder' style='text-align: right; padding-right: 5px;'>                                                     &nbsp;א-ה 11:00-19:00, לא כולל יום ו'&nbsp;&nbsp;                                                 </td>                                                 <td class='tdrightborder' style='text-align: right; padding-right: 5px;'>                                                     18/8-29/8                                                 </td>                                                 <td class='tdrightborder' style='text-align: right; padding-right: 5px;'>                                                     קניון אדומים קומת כניסה משער שלום דרך קדם 5                                                 </td>                                                 <td class='tdleftborder' style='font-weight: bold; text-align: right; padding-right: 5px;'>                                                     מעלה אדומים                                                 </td>                                             </tr></table>";
+  station.contentString = '<div id="stationContent"><div id="bodyContent">' + station.title + 
+          "<br>" + stationText + 
+          '</div></div>';
+  station.infowindow = new google.maps.InfoWindow({content: station.contentString});
+  addMarker(station.lang, station.long, station);
+  
+  var station = new Object();
+  station.lang = "31.755888";
+  station.long = "34.990023";
+  station.title = "קניון BIG FASHION יגאל אלון 3 בית שמש ";
+  var stationText = "<table><tr style='background-color: #ECECEC;' align='right' dir='rtl'>      <td class='tdrightborder' style='text-align: right; padding-right: 5px;'>           א-ה 11:00-19:00, לא כולל יום ו'        </td>      <td class='tdrightborder' style='text-align: right; padding-right: 5px;'>          4/8-29/8      </td>      <td class='tdrightborder' style='text-align: right; padding-right: 5px;'>          קניון BIG FASHION   יגאל אלון 3      </td>      <td class='tdleftborder' style='font-weight: bold; text-align: right; padding-right: 5px;'>          בית שמש      </td>  </tr></table>";
+  station.contentString = '<div id="stationContent"><div id="bodyContent">' + station.title + 
+          "<br>" + stationText + 
+          '</div></div>';
+  station.infowindow = new google.maps.InfoWindow({content: station.contentString});
+  addMarker(station.lang, station.long, station);
+  
+  
+  
+  map.fitBounds(bounds);
+  
+}
+
+
+function addMarker(tmpLong, tmpLat, station) {
+  console.log("-- going to put marker on: " + tmpLong + ", " + tmpLat);
+  var position = new google.maps.LatLng(tmpLong, tmpLat);
   var alertIcon = "img/alert-60-50.png";
-  tweet['marker'] = new google.maps.Marker({
-      position: myLatlng,
-      mpa: map,
-      icon: alertIcon,
-      title:"Rocket zone"
+  station['marker'] = new google.maps.Marker({
+    position: position,
+    mpa: map,
+//      icon: alertIcon,
+    title: "תחנת חלוקה"
   });
-  markersArray.push(tweet['marker']);
+  markersArray.push(station['marker']);
+  
+  bounds.extend(position);
 
-  var tweetTime = RocknCoder.Tweet.timeAgo(tweet.created_at);
-  var tweetText = replaceURLWithHTMLLinks(tweet.text);
-  // todo - add option to click on links
-  tweet['contentString'] = '<div id="tweetContent">'+
-    '<img src="' + tweet.profile_image_url + '" style="float:left; width: 56px; height:56px; padding-right:0.5em"/>' + 
-    '<span class="userTweet"><a href="https://twitter.com/'+ tweet.from_user + '" target="_blank">' + 
-    tweet.from_user +'</a></span>'+
-    '<div id="bodyContent">'+
-    tweetText +
-    '<br/><small>Created at: ' + tweetTime + '</small>'+
-    '</div></div>';
-
-  tweet['infowindow'] = new google.maps.InfoWindow({
-    content: tweet.contentString
-  });
-
-  google.maps.event.addListener(tweet.marker, 'click', function() {
+  google.maps.event.addListener(station.marker, 'click', function() {
     if (lastInfoWin) {
       lastInfoWin.close();
     }
-    tweet.infowindow.open(map, tweet.marker);
-    lastInfoWin = tweet.infowindow;
+    station.infowindow.open(map, station.marker);
+    lastInfoWin = station.infowindow;
   });
 
   // To add the marker to the map, call setMap();        
-  tweet.marker.setMap(map);
+  station.marker.setMap(map);
 
+  
 }
 
 function clearOverlays() {
@@ -64,64 +97,22 @@ function clearOverlays() {
   }
 }
 
-// tune the fetching of relevate tweets
-function fetchAndDraw(searchTerm) {
-  var searchTerm = encodeURI(searchTerm);
-  $.mobile.showPageLoadingMsg();
-  // TODO - make the 30mi part of the settings
-  $.ajax({
-    url: 'http://search.twitter.com/search.json?geocode=32.781157,34.398720,30mi&rpp=100&q='+searchTerm,
-    type: 'GET',
-    dataType: 'jsonp',
-    success: function(data, textStatus, xhr) {
-      var i;
-      $.mobile.hidePageLoadingMsg();
-      var bounds = new google.maps.LatLngBounds();
-      for (i = 0; i < data.results.length; i++) {
-        var tweet = data.results[i];
-        if (tweet.geo != null) {
-          // TODO - find a better way to make sure it's from Israel location
-          if (tweet.geo.coordinates[0] > 28 && tweet.geo.coordinates[0] < 34 &&
-             tweet.geo.coordinates[1] > 33 && tweet.geo.coordinates[1] < 35) {
-            addMarker(tweet.geo.coordinates[0], tweet.geo.coordinates[1], tweet);
-            var pos = new google.maps.LatLng(tweet.geo.coordinates[0], tweet.geo.coordinates[1]);
-            bounds.extend(pos);
-          }
-        }
-        else {
-          // TODO: translate from location to long/lat
-          //console.log("no geo but location: " + tweet.location);
-        }
-      }
-      // make sure our map is AROUND all the tweets
-      map.fitBounds(bounds);
-    },
-    error: function(jqXHR, textStatus, errorThrown){
-      console.error("Opss... Error: " + errorThrown);
-      $.mobile.hidePageLoadingMsg();
-    }
-  });
 
-  // check again every minute? setTimeout(fetchAndDraw, 60000);
-}
 
-$(document).on('pageinit','[data-role=page]', function(){
+
+$(document).on('pageinit', '[data-role=page]', function() {
   console.log("--start the map party--");
   initialize();
   $.mobile.touchOverflowEnabled = true;
+
+  addStations();
   $("#reload").click(function() {
     clearOverlays();
-    // to 'url' the strings
-    if ($('#tweetSearch').val()) {
-      fetchAndDraw($('#tweetSearch').val());
-    }
-    else {
-      fetchAndDraw("israel"); // as a default
-    }
+
   });
 });
 
 $('#map').live("pageshow", function() {
-  google.maps.event.trigger(map,'resize');
+  google.maps.event.trigger(map, 'resize');
 });
 

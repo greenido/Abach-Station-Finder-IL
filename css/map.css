@@ -9,15 +9,6 @@
   color: #9000A1;
   font-size: 90%;
   text-shadow: none;
-}
-
-#tweetContent {
   width: 250px;
 }
 
-.userTweet {
-  background-color: #F1F162;
-  font-size: 110%;
-  padding: 6px;
-  text-shadow: none;
-}
