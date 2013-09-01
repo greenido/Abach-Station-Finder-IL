@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Abach Finder IL</title>
+  <!-- Build so we won't need to use it -->
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Abach Finder in Israel">
+  <meta name="author" content="Ido Green | greenido.wordpress.com | @greenido">
+
+  <!-- css -->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+
+  <!-- todo: move it from here to its own file-->
+  <style>
+
+
+  </style>
+  <!-- js -->
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+  <script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_mrsCOGa_cip-_O9YzmruYQ831uQcqPE&sensor=true">
+  </script>
+
+  <script src="js/map.js"></script>
+
+</head>
+<body>
+
+
+  <!-- /Abach Finder Page -->
+  <div data-role="page" id="mainApp" data-theme="c">
+    <div data-role="header" data-theme="d">
+
+      <h1>רשימת תחנות</h1>
+      <a href="#stationsMap" data-icon="alert"  data-transition="pop" class="ui-btn-right">מפה </a>
+    </div>
+    <!-- /header -->
+    <div data-role="content" data-theme="c">
+
+      <p>
+        <!-- ---->
+        <!-- ---------------------------- -->
+      <div class="ui-grid-b" id="maintable">
+        <div class="ui-block-a"><div class="ui-bar ui-bar-a">כתובת תחנת החלוקה</div></div>
+        <div class="ui-block-b"><div class="ui-bar ui-bar-a" >כיצד להגיע</div></div>
+        <div class="ui-block-c"><div class="ui-bar ui-bar-a" >  שעות חלוקה</div></div>
+
+      </div><!-- /grid-c -->
+
+    </div>
+    <!------->
+    <a href="https://mapsengine.google.com/map/edit?mid=z9_o8RCN9SW0.kQIjbEfwAl2Y" 
+       data-direction="reverse" data-role="button" data-theme="b">מפת תחנות</a>
+    <a href="http://magen.israelpost.co.il/Abach/SearchPage.aspx?font=16&regId=0"
+       data-role="button" data-theme="a" target="_blank">
+      דף מידע רשמי של רשות הדואר
+    </a>
+
+    <div data-role="footer">
+      <h4>
+        <span class="ui-btn-center">
+          <img src="img/alert-60-50.png" alt="alertIL icon" />
+        </span>
+      </h4>
+    </div>  <!-- <a href="http://plus.ly/greenido" target="_blank">+greenido</a> /footer --> 
+
+  </div>  <!-- /page  -->
+
+  <div data-role="page" id="stationsMap">
+
+    <div data-role="header">
+      <h1>Map</h1>
+    </div><!-- /header -->
+
+    <div data-role="content">
+      <div id="map_canvas" style="width:100%; height:500px;"></div>
+      <p><a href="#">Back</a></p>
+    </div><!-- /content -->
+
+    <div data-role="footer">
+      <h4>TODO</h4>
+    </div><!-- /footer -->
+  </div><!-- /page -->
+
+
+  <script>
+        var _gaq = [['_setAccount', 'UA-27750723-1'], ['_trackPageview']];
+        (function(d, t) {
+          var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+          s.parentNode.insertBefore(g, s)
+        }(document, 'script'));
+  </script>
+
+  <!--[if lt IE 7 ]>
+  <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+  <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+  <![endif]-->
+</body>
+</html>
