@@ -1,8 +1,10 @@
-Abach FinderIL
-========
+Abach Finder IL
+===============
 
-Abach FinderIL is a mobile web app to show the power of using Google Sheets with App Script <br>
+Abach Finder IL is a mobile web app to show the power of using Google Sheets with App Script <br>
 and jquerymobile as the framework for mobile web apps.
+It allow users to see where are the NBC stations and get to them quickly with Waze (from mobile devices).
+
 
 ** Demo: <a href="http://ido-green.appspot.com/abach-map/index.html">ido-green.appspot.com/abach-map/</a>
 
