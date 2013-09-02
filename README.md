@@ -24,11 +24,11 @@ Features
 
 Use
 ===
-<li><a href='https://developers.google.com/apps-script/reference/spreadsheet/' 
-    data-role='button' target='_blank'>Google Sheets And App Script</a></li>
-<li><a href='https://developers.google.com/maps/documentation/javascript/' 
-    data-role='button' target='_blank'>Google Maps API v3.0</a></li>
-<li><a href='http://api.jquerymobile.com/' data-role='button' target='_blank'>jQueryMobile</a></li>
+* <a href='https://developers.google.com/apps-script/reference/spreadsheet/' 
+    data-role='button' target='_blank'>Google Sheets And App Script</a>
+* <a href='https://developers.google.com/maps/documentation/javascript/' 
+    data-role='button' target='_blank'>Google Maps API v3.0</a>
+* <a href='http://api.jquerymobile.com/' data-role='button' target='_blank'>jQueryMobile</a>
 
 
 
