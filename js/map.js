@@ -3,15 +3,30 @@
  *  date: Sep 2013
  */
 
-
-// TODO - move then to their own object.
+// TODO - move to their own object.
 var map;
 var markersArray = [];
 var bounds = new google.maps.LatLngBounds();
 
-//
-// fetching the stations geo points and other data from our google sheet in JSON baby!
-//
+/**
+ * Initialize our map obj.
+ * @returns {undefined}
+ */
+function initialize() {
+  var mapOptions = {
+    center: new google.maps.LatLng(31.7, 35.1),
+    zoom: 10,
+    streetViewControl: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  map = new google.maps.Map(document.getElementById("map_canvas"),
+          mapOptions);
+}
+
+/**
+ * Fetching the stations geo points and other data from our google sheet in JSON baby!
+ * @returns {undefined}
+ */
 function fetchPoints() {
   $.ajax({
     type: 'GET',
@@ -20,12 +35,11 @@ function fetchPoints() {
     success: function(response, status, xhr) {
       if (response !== "") {
         for (var i = 0; i < response.feed.entry.length; i++) {
-          console.log("data: " + response.feed.entry[i].content.$t);
+          //console.log("data: " + response.feed.entry[i].content.$t);
           //console.log("waze link: " + response.feed.entry[i].title.$t);
           var tmpData = response.feed.entry[i].content.$t.split(":");
           tmpData[4] = tmpData[4].replace("city", "");
-          tmpData[5] = tmpData[5].replace(", hours", "");
-          
+          tmpData[5] = tmpData[5].replace(", hours", "");   
           tmpData[3] = tmpData[3].replace(", address", "");
           var address = tmpData[4] + " " + tmpData[5];
           $("#maintable").append(
@@ -45,23 +59,12 @@ function fetchPoints() {
         $(".wazeButton").buttonMarkup( "refresh" );
       }
       else {
-        console.error("ERR: blagan... we didn't get any response from our google sheet JSON obj.");
+        console.error("ERR: blagan... we didn't get any response from our google sheet JSON obj. Status"+status + " XHR:"+xhr);
       }
     }
   });
 }
 
-//
-function initialize() {
-  var mapOptions = {
-    center: new google.maps.LatLng(31.7, 35.1),
-    zoom: 10,
-    streetViewControl: true,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  map = new google.maps.Map(document.getElementById("map_canvas"),
-          mapOptions);
-}
 
 /**
  * Adding the station to our map
@@ -93,7 +96,10 @@ function addStation(tmpData) {
 
 }
 
-//
+/**
+ * Clear all the markers
+ * @returns {undefined}
+ */
 function clearOverlays() {
   if (markersArray) {
     for (i in markersArray) {
@@ -102,9 +108,9 @@ function clearOverlays() {
   }
 }
 
-//
-// start the party
-//
+/**
+ * Start the party
+ */
 $(document).on('pageinit', '[data-role=page]', function() {
   console.log("--start the map party--");
 
@@ -117,5 +123,3 @@ $(document).on('pageinit', '[data-role=page]', function() {
   });
 
 });
-
-

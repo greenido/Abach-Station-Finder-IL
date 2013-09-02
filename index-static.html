@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Abach Finder IL</title>
+  <!-- Build so we won't need to use it -->
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Abach Finder in Israel">
+  <meta name="author" content="Ido Green | greenido.wordpress.com | @greenido">
+
+  <!-- css -->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/map.css" />
+
+  <!-- js -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_mrsCOGa_cip-_O9YzmruYQ831uQcqPE&sensor=true">
+  </script>
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  <script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/map.js"></script>
+</head>
+<body>
+
+
+        <!-- /Abach Finder Page -->
+        <div data-role="page" id="tweet" data-theme="d">
+          <div data-role="header">
+            <a href="#mainstuff" data-icon="home" class="ui-btn-left">Main</a>
+            <h1>רשימת תחנות</h1>
+            <a href="#" id="refreshTweets" data-icon="refresh"  data-transition="pop" 
+               class="ui-btn-right">Refresh</a>
+          </div>
+          <!-- /header -->
+          <div id="tweets" data-role="content" data-theme="d">
+            <p>    
+            </p>
+            <p>
+              <!-- ---->
+              <!-- ---------------------------- -->
+            <table border="0" ">
+              <tbody><tr style="background-color: #DEDEDE;">
+                  <td class="thrightborder" align="center">
+                    שעות חלוקה
+                  </td>
+                  <td class="thrightborder" align="center">
+                    מועדי החלוקה
+                  </td>
+                  <td class="thrightborder" align="center">
+                    כתובת תחנת החלוקה
+                  </td>
+                  <td class="thrightborder" align="center">
+                    שם היישוב
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    א-ה 11:00-19:00, לא כולל יום ו'  
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    18/8-3/9
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    מתנ"ס שמואל הנביא מגן האלף 3
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    ירושלים
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl00_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    &nbsp;א-ה 11:00-19:00, לא כולל יום ו'&nbsp;&nbsp;
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    18/8-29/8
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    קניון אדומים קומת כניסה משער שלום דרך קדם 5
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    מעלה אדומים
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl01_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    א-ה 11:00-19:00, לא כולל יום ו'  
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    4/8-29/8
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    קניון BIG FASHION   יגאל אלון 3
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    בית שמש
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl02_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    א-ה 8:00-15:00, לא כולל יום ו'  
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    18/8-3/9
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    סניף הדואר בית המיון דרך ההגנה 137
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    תל אביב
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl03_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    א-ה 8:00-15:00, לא כולל יום ו'   
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    קבועה
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    רחוב הנביאים 22 מעל סניף הדואר
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    חיפה
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl04_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    לא כולל יום ו'  10:00-19:00
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    1/9-12/9
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    הרב נכויות אולם ספורט אהוד קינמון  10
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    בת ים
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl05_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    לא כולל יום ו'  10:00-19:00
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    1/9-12/9
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    מרכז פיס רמת אלחנן אשל אברהם פינת רבינוב
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    בני ברק
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl06_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    לא כולל יום ו'  10:00-19:00
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    1/9-12/9
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    מרכז קהילתי רוזין רזנר 2
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    תל אביב
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl07_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+                <tr style="background-color: #ECECEC;" align="right" dir="rtl">
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    לא כולל יום ו'  10:00-19:00
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    1/9-12/9
+                  </td>
+                  <td class="tdrightborder" style="text-align: right; padding-right: 5px;">
+                    בית הצנחן רוקח 121
+                  </td>
+                  <td class="tdleftborder" style="font-weight: bold; text-align: right; padding-right: 5px;">
+                    רמת גן
+                  </td>
+                </tr>
+                <tr class="TextNormal">
+                  <td colspan="4" style="line-height: 25px; padding-bottom: 0.5em; padding-right: 5px;" dir="rtl">
+                    <span class="BlueLink"><span id="ctl00_ContentPlaceHolder1_rptDistribution_ctl08_lblRemark">הערות נוספות:</span></span> 
+                    ייתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+                  </td>
+                </tr>
+
+              </tbody></table>
+          </div>
+          <!------->
+          <a href="#mainstuff" data-direction="reverse" data-role="button" data-theme="b">Main</a>
+          </p>
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+          <h4>
+            <span class="ui-btn-center">
+              <img src="img/alert-60-50.png" alt="alertIL icon" />
+            </span>
+          </h4>
+        </div>  <!-- <a href="http://plus.ly/greenido" target="_blank">+greenido</a> /footer --> 
+    </div>
+    <!-- /page tweet -->
+
+    <!-- MAP PAGE -->
+    <div data-role="page" id="map" data-theme="d">
+      <div data-role="header">
+        <a href="#mainstuff" data-icon="home" data-transition="pop" class="ui-btn-left">Main</a>
+        <h1>Map</h1>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="a">
+        <!-- <iframe src="tweet-map.html" frameborder="0" width="100%" height="800px"/> -->
+        <div id="map_canvas" style="width:100%; height:500px;"></div>
+
+
+      </div>  <!-- /content -->
+      <div data-role="footer">
+        <h4>
+          2013
+          <a href="http://plus.ly/greenido" target="_blank">+greenido</a>
+        </h4>
+      </div><!-- /footer --> 
+    </div><!-- /page Map -->
+
+    <!-- Options -->
+    <div data-role="page" id="options" data-theme="d">
+      <div data-role="header">
+        <a href="#mainstuff" data-icon="home" class="ui-btn-left">Main</a>
+        <h1>Options</h1>
+      </div>
+      <!-- /header -->
+      <!--
+      <div data-role="content" data-theme="a">
+        <div data-role="fieldcontain">
+          <label for="select-radius" class="select"> Radius</label>
+          <select name="select-radius" id="select-radius">
+            <option value="10">10km</option>
+            <option value="20">20km</option>
+            <option value="30">30km</option>
+            <option value="40">40km</option>
+            <option value="50">50km</option>
+            <option value="75">75km</option>
+            <option value="100">190km</option>
+            <option value="500">500km</option>
+          </select>
+    
+          <label>Search for hashtags, terms and users</label><br/>
+          <label for="tweet-term" class="select" value="">רשימת תחנות</label>
+          <input id="tweet-term" type="search" name="tweet-term" />
+        </div>
+      -->
+      <h3>TODO</h3>
+      <a href="#saveMsg" id="save-options" data-role="button"  data-rel="popup" data-icon="save">Save</a>
+      <div data-role="popup" id="saveMsg">
+        <p>Cool - It's saved.<p>
+      </div>
+    </div>  <!-- /content -->
+    <div data-role="footer">
+      <h4>
+        2013
+        <a href="http://plus.ly/greenido" target="_blank">+greenido</a>
+      </h4>
+    </div><!-- /footer --> 
+  </div><!-- /page Options -->
+
+  <script>
+      var _gaq = [['_setAccount', 'UA-27750723-1'], ['_trackPageview']];
+      (function(d, t) {
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s)
+      }(document, 'script'));
+  </script>
+
+  <!--[if lt IE 7 ]>
+  <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+  <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+  <![endif]-->
+</body>
+</html>
