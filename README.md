@@ -4,7 +4,7 @@ Abach FinderIL
 Abach FinderIL is a mobile web app to show the power of using Google Sheets with App Script <br>
 and jquerymobile as the framework for mobile web apps.
 
-** Temp location: TBD
+** Demo: <a href="http://ido-green.appspot.com/abach-map/index.html">ido-green.appspot.com/abach-map/</a>
 
 Goal
 ====
