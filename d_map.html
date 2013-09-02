@@ -15,8 +15,25 @@
 
   <!-- todo: move it from here to its own file-->
   <style>
-
-
+    .righttext {
+      text-align: right;
+    }
+    .butText {
+      position: relative;
+      bottom: 0.5em;
+    }
+    #map_canvas {
+      width:95%; 
+      height:500px;
+      position: relative;
+      left: 1em;
+    }
+    .darkback {
+      background-color: darkblue;
+      text-align: right;
+      padding: 5px;
+      border-radius: 15px;
+    }
   </style>
   <!-- js -->
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -27,17 +44,14 @@
   </script>
 
   <script src="js/map.js"></script>
-
 </head>
 <body>
 
-
   <!-- /Abach Finder Page -->
-  <div data-role="page" id="mainApp" data-theme="c">
-    <div data-role="header" data-theme="d">
-
+  <div data-role="page" id="mainApp" data-theme="a">
+    <div data-role="header" data-theme="a">
       <h1>רשימת תחנות</h1>
-      <a href="#stationsMap" data-icon="alert"  data-transition="pop" class="ui-btn-right">מפה </a>
+      <a href="#aboutPage" data-icon="alert"  data-transition="pop" class="ui-btn-right">About</a>
     </div>
     <!-- /header -->
     <div data-role="content" data-theme="c">
@@ -46,55 +60,72 @@
         <!-- ---->
         <!-- ---------------------------- -->
       <div class="ui-grid-b" id="maintable">
-        <div class="ui-block-a"><div class="ui-bar ui-bar-a">כתובת תחנת החלוקה</div></div>
-        <div class="ui-block-b"><div class="ui-bar ui-bar-a" >כיצד להגיע</div></div>
-        <div class="ui-block-c"><div class="ui-bar ui-bar-a" >  שעות חלוקה</div></div>
+        <div class="ui-block-a"><div class="ui-bar ui-bar-a righttext">כתובת תחנת החלוקה</div></div>
+        <div class="ui-block-b"><div class="ui-bar ui-bar-a righttext" >כיצד להגיע</div></div>
+        <div class="ui-block-c"><div class="ui-bar ui-bar-a righttext" >  שעות חלוקה</div></div>
 
       </div><!-- /grid-c -->
 
     </div>
-    <!------->
-    <a href="https://mapsengine.google.com/map/edit?mid=z9_o8RCN9SW0.kQIjbEfwAl2Y" 
-       data-direction="reverse" data-role="button" data-theme="b">מפת תחנות</a>
+    <div data-role="content" class='righttext' data-theme="e">
+
+      יתכנו שינויים בימים ובשעות הפתיחה של תחנתו החלוקה,לכן מומלץ להתעדכן כ-24 שעות טרם הגעתך לתחנת החלוקה בשעות הפתיחה ובמיקומי התחנות במרכז המידע של פיקוד העורף 104
+    </div>
+
+    <!--- THE MAP ---->
+    <div data-role="header" data-theme="a">
+      <h2> מפה    </h2>
+    </div>
+    <div id="map_canvas"></div>
+
     <a href="http://magen.israelpost.co.il/Abach/SearchPage.aspx?font=16&regId=0"
-       data-role="button" data-theme="a" target="_blank">
+       data-role="button" data-theme="b" target="_blank">
       דף מידע רשמי של רשות הדואר
     </a>
-
-    <div data-role="footer">
+    <div data-role="footer">   
       <h4>
         <span class="ui-btn-center">
           <img src="img/alert-60-50.png" alt="alertIL icon" />
+          <a href="http://ido-green.appspot.com" data-role='button' target="_blank">Ido's Projects</a>
         </span>
       </h4>
     </div>  <!-- <a href="http://plus.ly/greenido" target="_blank">+greenido</a> /footer --> 
 
   </div>  <!-- /page  -->
 
-  <div data-role="page" id="stationsMap">
-
+  <div data-role="page" id="aboutPage" >
     <div data-role="header">
-      <h1>Map</h1>
+      <h1>About</h1>
+      <a href="#mainApp" data-icon="back">חזרה</a>
     </div><!-- /header -->
 
-    <div data-role="content">
-      <div id="map_canvas" style="width:100%; height:500px;"></div>
-      <p><a href="#">Back</a></p>
-    </div><!-- /content -->
+    <div data-role="content" data-theme="d">
+      <h2>This demo web app is built by using:</h2>
+      <ul>
+        <li><a href='https://developers.google.com/apps-script/reference/spreadsheet/' 
+               data-role='button' target='_blank'>Google Sheets And App Script</a></li>
+        <li><a href='https://developers.google.com/maps/documentation/javascript/' 
+               data-role='button' target='_blank'>Google Maps API v3.0</a></li>
+        <li><a href='http://api.jquerymobile.com/' data-role='button' target='_blank'>jQueryMobile</a></li>
 
-    <div data-role="footer">
-      <h4>TODO</h4>
-    </div><!-- /footer -->
-  </div><!-- /page -->
+      </ul>
+
+      <div data-role="footer">   
+        <a href='http://greenido.wordpress.com' data-role='button' target='_blank'
+           data-icon='forward' target='_blank'>Ido's Blog</a>
+
+      </div>
+    </div><!-- /content -->
+  </div><!-- / About page --> 
 
 
   <script>
-        var _gaq = [['_setAccount', 'UA-27750723-1'], ['_trackPageview']];
-        (function(d, t) {
-          var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-          g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
-          s.parentNode.insertBefore(g, s)
-        }(document, 'script'));
+      var _gaq = [['_setAccount', 'UA-27750723-1'], ['_trackPageview']];
+      (function(d, t) {
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s)
+      }(document, 'script'));
   </script>
 
   <!--[if lt IE 7 ]>
