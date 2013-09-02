@@ -7,6 +7,7 @@
 var map;
 var markersArray = [];
 var bounds = new google.maps.LatLngBounds();
+var gotTheData = false;
 
 /**
  * Initialize our map obj.
@@ -33,7 +34,11 @@ function fetchPoints() {
     dataType: 'json',
     url: 'https://spreadsheets.google.com/feeds/list/0Ass6q5sTeDKidDlKY3BUU0NoSnk4UUZIQ2NuUDYtTHc/od7/public/basic?alt=json',
     success: function(response, status, xhr) {
+      if (gotTheData) {
+        return;
+      }
       if (response !== "") {
+        gotTheData = true;
         for (var i = 0; i < response.feed.entry.length; i++) {
           //console.log("data: " + response.feed.entry[i].content.$t);
           //console.log("waze link: " + response.feed.entry[i].title.$t);
