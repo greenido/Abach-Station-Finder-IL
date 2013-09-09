@@ -120,7 +120,6 @@ $(document).on('pageinit', '[data-role=page]', function() {
   console.log("--start the map party--");
 
   initialize();
-  $.mobile.touchOverflowEnabled = true;
   fetchPoints();
 
   $("#reload").click(function() {
