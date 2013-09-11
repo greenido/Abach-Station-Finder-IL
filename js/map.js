@@ -44,27 +44,24 @@ function fetchPoints() {
           //console.log("waze link: " + response.feed.entry[i].title.$t);
           var tmpData = response.feed.entry[i].content.$t.split(":");
           tmpData[4] = tmpData[4].replace("city", "");
-          tmpData[5] = tmpData[5].replace(", hours", "");   
+          tmpData[5] = tmpData[5].replace(", hours", "");
           tmpData[3] = tmpData[3].replace(", address", "");
           var address = tmpData[4] + " " + tmpData[5];
           $("#maintable").append(
-                  '<div class="ui-block-a righttext"><div class="ui-bar ui-bar-b" style="height:75px">' +
+                  '<div class="row-fluid righttext"> <div class="span5 inner-cell" >' +
                   '<a target="_blank" href="https://maps.google.com/?q=' + encodeURI(tmpData[3]) + '">' +
                   address +
-                  '</a></div></div>' +
-                  '<div class="ui-block-b"><div class="ui-bar ui-bar-b" style="height:75px">' +
+                  '</a></div>' +
+                  '<div class="span2 inner-cell mid-cell" >' +
                   '<a href="' + response.feed.entry[i].title.$t +
-                  '" data-role="button" class="wazeButton"><img src="img/waze48.png" alt="waze logo"><span class="butText">לחץ לניווט  </span></a></div></div>' +
-                  '<div class="ui-block-c righttext"><div class="ui-bar ui-bar-d" style="height:75px">' +
-                  tmpData[6] +'</div></div>'
-                  );
+                  '"  class="btn btn-large wazeButton" type="button" title="לחץ ממכשיר נייד"><img src="img/waze48.png" alt="waze logo">Waze</a></div>' +
+                  '<div class="span4 inner-cell righttext">' + tmpData[6] + '</div></div> </div>');
           addStation(tmpData);
         }
         map.fitBounds(bounds);
-        $(".wazeButton").buttonMarkup( "refresh" );
       }
       else {
-        console.error("ERR: blagan... we didn't get any response from our google sheet JSON obj. Status"+status + " XHR:"+xhr);
+        console.error("ERR: blagan... we didn't get any response from our google sheet JSON obj. Status" + status + " XHR:" + xhr);
       }
     }
   });
@@ -77,27 +74,27 @@ function fetchPoints() {
  * @returns {undefined}
  */
 function addStation(tmpData) {
-    var station = new Object;
-    var stationText = tmpData[4] + " <br>"  + tmpData[6];
-    station.long = tmpData[1].replace(", geolong", "");
-    station.lang = tmpData[2].replace(", geopoint", "");
-    station.title = tmpData[5] ; // TODO - change it
-    station.contentString = "<div class='textright darkback'>"+  station.title + 
-            "<br>" + stationText + "</div>";
+  var station = new Object;
+  var stationText = tmpData[4] + " <br>" + tmpData[6];
+  station.long = tmpData[1].replace(", geolong", "");
+  station.lang = tmpData[2].replace(", geopoint", "");
+  station.title = tmpData[5]; // TODO - change it
+  station.contentString = "<div class='textright darkback'>" + station.title +
+          "<br>" + stationText + "</div>";
 
-    var infowindow = new google.maps.InfoWindow();
-    var tmpPos = new google.maps.LatLng(station.long,station.lang);
-    var marker = new google.maps.Marker({
-      position: tmpPos,
-      map: map
-    });
-    bounds.extend(tmpPos);
-    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-      return function() {
-        infowindow.setContent(station.contentString); //"תחנת חלוקה <br>" +  tmpData[4] 
-        infowindow.open(map, marker);
-      }
-    })(marker));
+  var infowindow = new google.maps.InfoWindow();
+  var tmpPos = new google.maps.LatLng(station.long, station.lang);
+  var marker = new google.maps.Marker({
+    position: tmpPos,
+    map: map
+  });
+  bounds.extend(tmpPos);
+  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    return function() {
+      infowindow.setContent(station.contentString); //"תחנת חלוקה <br>" +  tmpData[4] 
+      infowindow.open(map, marker);
+    }
+  })(marker));
 
 }
 
@@ -116,11 +113,10 @@ function clearOverlays() {
 /**
  * Start the party
  */
-$(document).on('pageinit', '[data-role=page]', function() {
+$(document).ready(function() {
   console.log("--start the map party--");
 
   initialize();
-  $.mobile.touchOverflowEnabled = true;
   fetchPoints();
 
   $("#reload").click(function() {
@@ -128,3 +124,4 @@ $(document).on('pageinit', '[data-role=page]', function() {
   });
 
 });
+

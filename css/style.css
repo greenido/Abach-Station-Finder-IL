@@ -13,7 +13,7 @@
   width: 60%;
   border-radius: 5px;
 }
-    
+
 .hero-unit {
   padding-top: 1em;
   padding-left: 10px;
@@ -66,4 +66,47 @@
 
 .ui-header {
   font-size: 150%;
+}
+
+.tbl-header {
+  font-size: 130%;
+  font-weight: bolder;
+  background-color: lightblue;
+  padding:0.5em;
+}
+
+.inner-cell {
+  background-color: lightsalmon;
+  padding: 0.2em;
+  height: 80px;
+  font-size: 120%;
+}
+.righttext {
+  text-align: right;
+}
+.butText {
+  position: relative;
+  bottom: 0.5em;
+}
+#map_canvas {
+  width:95%; 
+  height:500px;
+  position: relative;
+  left: 1em;
+}
+.darkback {
+  background-color: darkblue;
+  text-align: right;
+  padding: 5px;
+  border-radius: 15px;
+}
+.mid-cell {
+  float: none; 
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+.wazeButton {
+  padding: 5px;
+
 }
