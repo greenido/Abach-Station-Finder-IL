@@ -54,7 +54,7 @@ function fetchPoints() {
                   '</a></div>' +
                   '<div class="span2 inner-cell mid-cell" >' +
                   '<a href="' + response.feed.entry[i].title.$t +
-                  '"  class="btn btn-large wazeButton" type="button" title="לחץ ממכשיר נייד"><img src="img/waze48.png" alt="waze logo">Waze</a></div>' +
+                  '"  class="btn" type="button" title="לחץ ממכשיר נייד"><img src="img/waze48.png" alt="waze logo">Waze</a></div>' +
                   '<div class="span4 inner-cell righttext">' + tmpData[6] + '</div></div> </div>');
           addStation(tmpData);
         }

@@ -76,10 +76,10 @@
 }
 
 .inner-cell {
-  background-color: lightsalmon;
+  background-color: #D1FAE0;
   padding: 0.2em;
-  height: 80px;
   font-size: 120%;
+  margin-bottom: 5px;
 }
 .righttext {
   text-align: right;
@@ -106,7 +106,6 @@
   margin-right: auto; 
 }
 
-.wazeButton {
-  padding: 5px;
-
+#aboutPage {
+  margin-bottom: 2em;
 }
